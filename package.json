@@ -6,6 +6,7 @@
     "type": "git",
     "url": "https://github.com/you/repo.git"
   },
+  "author": "Joshua Comeau <joshwcomeau@gmail.com>",
   "license": "MIT",
   "scripts": {
     "prepublish": ". ./.scripts/prepublish.sh",
@@ -15,7 +16,8 @@
     "test": "npm run lint && npm run testonly",
     "test-watch": "npm run testonly -- --watch --watch-extensions js",
     "storybook": "start-storybook -p 9010",
-    "publish-storybook": "bash .scripts/publish_storybook.sh"
+    "publish-storybook": "bash .scripts/publish_storybook.sh",
+    "add-component": "NODE_ENV=development node .scripts/user/add-component.js"
   },
   "devDependencies": {
     "react": "^15.3.2",
@@ -43,13 +45,12 @@
     "jsdom": "^9.5.0",
 
     "@kadira/storybook": "^2.18.1",
-    "git-url-parse": "^6.0.1"
+    "git-url-parse": "^6.0.1",
+
+    "change-case": "^3.0.0"
   },
   "peerDependencies": {
     "react": "^0.14.7 || ^15.0.0"
-  },
-  "dependencies": {
-    "babel-runtime": "^6.11.6"
   },
   "main": "dist/index.js",
   "engines": {

@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
+import '../../polyfills';
 
 const Filter = ({ collection, predicate, children }) => (
   <div>

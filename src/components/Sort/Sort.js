@@ -18,6 +18,8 @@ const Sort = ({ children, elementType, collection, comparator, delegated }) => {
   );
 };
 
+Sort.displayName = 'ReactCollectionHelperSort';
+
 Sort.propTypes = {
   children: PropTypes.func.isRequired,
   elementType: PropTypes.oneOfType([
@@ -25,7 +27,7 @@ Sort.propTypes = {
     PropTypes.func,   // For composite components (eg. TodoListItem)
   ]).isRequired,
   collection: PropTypes.array.isRequired,
-  by: PropTypes.oneOfType([
+  comparator: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.func,
   ]),

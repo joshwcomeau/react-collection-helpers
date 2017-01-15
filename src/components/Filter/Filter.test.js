@@ -6,6 +6,7 @@ import { stub } from 'sinon';
 /* eslint-enable */
 
 import Filter from '../Filter';
+import Sort from '../Sort';
 
 const { describe, it } = global;
 
@@ -119,6 +120,27 @@ describe('Filter', () => {
 
       expect(wrapper.find('#a').length).to.equal(1);
       expect(wrapper.find('#b').length).to.equal(0);
+    });
+  });
+
+  describe('composed with <Sort>', () => {
+    it('sorts the filtered results', () => {
+      const collection = [
+        { id: 'a', price: 10 },
+        { id: 'b', price: 5 },
+        { id: 'c', price: 12 },
+        { id: 'd', price: 4.50 },
+      ];
+
+      const wrapper = shallow(
+        <Filter collection={collection} predicate={item => item.price < 10}>
+          <Sort comparator="price">
+            {item => <div key={item.id}>{item.price}</div>}
+          </Sort>
+        </Filter>
+      );
+
+      expect(wrapper.html()).to.equal('<div><div>4.5</div><div>5</div></div>');
     });
   });
 });

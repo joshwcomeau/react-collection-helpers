@@ -1,3 +1,3 @@
 # React Collection Helpers Component
 
-React Collection Helpers Component
+Coming soon to a package manager near you!

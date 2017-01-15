@@ -83,8 +83,6 @@ const ${ComponentName} = () => {
   );
 };
 
-${ComponentName}.displayName = '${ComponentName}';
-
 ${ComponentName}.propTypes = {
 
 };

@@ -6,7 +6,7 @@
     "import/prefer-default-export": 0,
     "react/require-extension": 0,
     "react/jsx-filename-extension": 0,
-    "react/forbid-prop-types": 0
+    "react/forbid-prop-types": 0,
     "no-console": [1, { allow: ["warn", "error", "info"] }],
   },
 }

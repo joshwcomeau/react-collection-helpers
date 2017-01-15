@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+/* eslint-disable react/prop-types */
+import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 
 import Filter from '../Filter';
@@ -42,4 +43,4 @@ storiesOf('Filter', module)
         elementType={ShopItem}
       />
     );
-  })
+  });

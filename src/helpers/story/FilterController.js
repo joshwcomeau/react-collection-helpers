@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-for */
 import React, { Component, PropTypes } from 'react';
 
 import Filter from '../../components/Filter';
@@ -16,12 +17,12 @@ class FilterController extends Component {
     this.setState({
       filterBy: val
         ? [...this.state.filterBy, key]
-        : this.state.filterBy.filter(item => item !== key)
-    })
+        : this.state.filterBy.filter(item => item !== key),
+    });
   }
 
   renderFilterControls() {
-    return this.props.filterControls.map((name) => (
+    return this.props.filterControls.map(name => (
       <label style={{ paddingRight: 20, lineHeight: 2 }}>
         <input
           type="checkbox"
@@ -34,10 +35,9 @@ class FilterController extends Component {
   }
 
   render() {
-    console.log(this.state.filterBy)
-    const predicate = item => {
-      return this.state.filterBy.every(filterKey => item[filterKey] === true)
-    };
+    const predicate = item => (
+      this.state.filterBy.every(filterKey => item[filterKey] === true)
+    );
 
     return (
       <div>
@@ -51,13 +51,16 @@ class FilterController extends Component {
           )}
         </Filter>
       </div>
-    )
+    );
   }
 }
 
 FilterController.displayName = 'FilterController';
 
 FilterController.propTypes = {
+  filterControls: PropTypes.arrayOf(PropTypes.string),
+  collection: PropTypes.array,
+  elementType: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 };
 
 FilterController.defaultProps = {

@@ -2,11 +2,16 @@ import React, { PropTypes } from 'react';
 
 import '../../polyfills';
 
-const Filter = ({ collection, predicate, children }) => (
-  <div>
-    {collection.filter(predicate).map(children)}
-  </div>
-);
+
+const Filter = ({ collection, predicate, children }) => {
+  const filteredCollection = filterByType(collection, predicate);
+
+  return (
+    <div>
+      {filteredCollection.map(children)}
+    </div>
+  );
+};
 
 Filter.displayName = 'Filter';
 

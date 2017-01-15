@@ -12,7 +12,7 @@ const { describe, it } = global;
 describe('Sort', () => {
   it('renders without incident', () => {
     const wrapper = shallow(
-      <Sort collection={[]} by={() => {}}>
+      <Sort collection={[]} comparator={() => {}}>
         {() => {}}
       </Sort>
     );
@@ -91,7 +91,7 @@ describe('Sort', () => {
       ];
 
       const wrapper = shallow(
-        <Sort collection={collection} by="name">
+        <Sort collection={collection} comparator="name">
           {({ id, name }) => <div key={id}>{name}</div>}
         </Sort>
       );
@@ -99,22 +99,25 @@ describe('Sort', () => {
       expect(wrapper.html()).to.equal('<div><div>Apple</div><div>Banana</div><div>Cheese</div></div>');
     });
 
-    it('filters by a by match object', () => {
+    it('filters by a compare function', () => {
       // More advanced tests for the filtering logic itself can be found in
-      // src/utils/filterByType.test.js
+      // src/utils/filterBy.test.js
       const collection = [
-        { id: 'a', name: 'Apple', onSale: false },
-        { id: 'b', name: 'Banana', onSale: true },
+        { id: 'b', name: 'Banana' },
+        { id: 'a', name: 'Apple' },
+        { id: 'c', name: 'Cheese' },
       ];
 
       const wrapper = shallow(
-        <Sort collection={collection} by={{ name: 'Apple' }}>
-          {({ id, name }) => <div key={id} id={id}>{name}</div>}
+        <Sort
+          collection={collection}
+          comparator={(a, b) => (a.id < b.id ? -1 : 1)}
+        >
+          {({ id, name }) => <div key={id}>{name}</div>}
         </Sort>
       );
 
-      expect(wrapper.find('#a').length).to.equal(1);
-      expect(wrapper.find('#b').length).to.equal(0);
+      expect(wrapper.html()).to.equal('<div><div>Apple</div><div>Banana</div><div>Cheese</div></div>');
     });
   });
 });

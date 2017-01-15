@@ -1,10 +1,14 @@
 import { createElement, PropTypes } from 'react';
 
 import '../../polyfills';
-import filterByType from '../../utils/filterByType';
+import filterBy from '../../utils/filterBy';
 
 const Filter = ({ children, elementType, collection, predicate, delegated }) => {
-  const filteredCollection = filterByType({ collection, predicate });
+  const filteredCollection = filterBy({
+    collection,
+    predicate,
+    component: 'Filter',
+  });
 
   return createElement(
     elementType,

@@ -1,13 +1,20 @@
 import { createElement, PropTypes } from 'react';
 
 import '../../polyfills';
+import sortBy from '../../utils/sortBy';
 
 
-const Sort = ({ children, elementType, collection, by, delegated }) => {
+const Sort = ({ children, elementType, collection, comparator, delegated }) => {
+  const sortedCollection = sortBy({
+    collection,
+    comparator,
+    component: 'Sort',
+  });
+
   return createElement(
     elementType,
     delegated,
-    collection.sort(by).map(children)
+    sortedCollection.map(children)
   );
 };
 

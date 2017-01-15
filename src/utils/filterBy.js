@@ -1,6 +1,6 @@
 import { invalidTypeSuppliedAsPredicate } from '../helpers/error-message.helpers';
 
-export default function filterByType({ collection, predicate }) {
+export default function filterBy({ collection, predicate, component }) {
   // For now, we don't accept predicates that aren't objects or functions.
   const type = Array.isArray(predicate) ? 'array' : typeof predicate;
 
@@ -21,6 +21,8 @@ export default function filterByType({ collection, predicate }) {
       ));
 
     default:
-      throw new Error(invalidTypeSuppliedAsPredicate({ type, predicate }));
+      throw new Error(
+        invalidTypeSuppliedAsPredicate({ type, predicate, component })
+      );
   }
 }

@@ -105,7 +105,7 @@ describe('Filter', () => {
 
     it('filters by a predicate match object', () => {
       // More advanced tests for the filtering logic itself can be found in
-      // src/utils/filterByType.test.js
+      // src/utils/filterBy.test.js
       const collection = [
         { id: 'a', name: 'Apple', onSale: false },
         { id: 'b', name: 'Banana', onSale: true },

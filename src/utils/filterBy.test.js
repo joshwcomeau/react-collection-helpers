@@ -2,18 +2,18 @@
 import { expect } from 'chai';
 /* eslint-enable */
 
-import filterByType from './filterByType';
+import filterBy from './filterBy';
 
 const { describe, context, it } = global;
 
-describe('filterByType', () => {
+describe('filterBy', () => {
   context('with invalid predicates', () => {
     it('throws when a string predicate is supplied', () => {
       const collection = [{ id: 'a', onSale: true }, { id: 'b', onSale: false }];
       const predicate = 'onSale';
 
       const errorRegex = /invalid predicate/i;
-      expect(() => filterByType({ collection, predicate })).to.throw(errorRegex);
+      expect(() => filterBy({ collection, predicate })).to.throw(errorRegex);
     });
 
     it('throws when a number predicate is supplied', () => {
@@ -21,7 +21,7 @@ describe('filterByType', () => {
       const predicate = 10;
 
       const errorRegex = /invalid predicate/i;
-      expect(() => filterByType({ collection, predicate })).to.throw(errorRegex);
+      expect(() => filterBy({ collection, predicate })).to.throw(errorRegex);
     });
 
     it('throws when an array predicate is supplied', () => {
@@ -29,7 +29,7 @@ describe('filterByType', () => {
       const predicate = ['b', 'c'];
 
       const errorRegex = /invalid predicate/i;
-      expect(() => filterByType({ collection, predicate })).to.throw(errorRegex);
+      expect(() => filterBy({ collection, predicate })).to.throw(errorRegex);
     });
   });
 
@@ -39,7 +39,7 @@ describe('filterByType', () => {
       const predicate = item => item.onSale;
 
       const expectedResult = [{ id: 'a', onSale: true }];
-      const actualResult = filterByType({ collection, predicate });
+      const actualResult = filterBy({ collection, predicate });
 
       expect(actualResult).to.deep.equal(expectedResult);
     });
@@ -49,7 +49,7 @@ describe('filterByType', () => {
       const predicate = item => item.onSale;
 
       const expectedResult = [];
-      const actualResult = filterByType({ collection, predicate });
+      const actualResult = filterBy({ collection, predicate });
 
       expect(actualResult).to.deep.equal(expectedResult);
     });
@@ -64,7 +64,7 @@ describe('filterByType', () => {
       const predicate = { onSale: true };
 
       const expectedResult = [{ id: 'a', onSale: true }];
-      const actualResult = filterByType({ collection, predicate });
+      const actualResult = filterBy({ collection, predicate });
 
       expect(actualResult).to.deep.equal(expectedResult);
     });
@@ -77,7 +77,7 @@ describe('filterByType', () => {
       const predicate = { id: 'b', onSale: false };
 
       const expectedResult = [predicate];
-      const actualResult = filterByType({ collection, predicate });
+      const actualResult = filterBy({ collection, predicate });
 
       expect(actualResult).to.deep.equal(expectedResult);
     });
@@ -90,7 +90,7 @@ describe('filterByType', () => {
       const predicate = { id: 'b', onSale: true };
 
       const expectedResult = [];
-      const actualResult = filterByType({ collection, predicate });
+      const actualResult = filterBy({ collection, predicate });
 
       expect(actualResult).to.deep.equal(expectedResult);
     });
@@ -103,7 +103,7 @@ describe('filterByType', () => {
       const predicate = { onSale: true, price: 10 };
 
       const expectedResult = [];
-      const actualResult = filterByType({ collection, predicate });
+      const actualResult = filterBy({ collection, predicate });
 
       expect(actualResult).to.deep.equal(expectedResult);
     });

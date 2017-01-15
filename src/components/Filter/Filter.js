@@ -1,31 +1,36 @@
-import React, { PropTypes } from 'react';
+import { createElement, PropTypes } from 'react';
 
 import '../../polyfills';
 import filterByType from '../../utils/filterByType';
 
-const Filter = ({ collection, predicate, children }) => {
+const Filter = ({ children, elementType, collection, predicate, delegated }) => {
   const filteredCollection = filterByType({ collection, predicate });
 
-  return (
-    <div>
-      {filteredCollection.map(children)}
-    </div>
+  return createElement(
+    elementType,
+    delegated,
+    filteredCollection.map(children)
   );
 };
 
 Filter.displayName = 'Filter';
 
 Filter.propTypes = {
+  children: PropTypes.func.isRequired,
+  elementType: PropTypes.oneOfType([
+    PropTypes.string, // For native nodes (eg. 'div')
+    PropTypes.func,   // For composite components (eg. TodoListItem)
+  ]).isRequired,
   collection: PropTypes.array.isRequired,
   predicate: PropTypes.oneOfType([
-    PropTypes.func.isRequired,
-    PropTypes.object.isRequired,
-  ]),
-  children: PropTypes.func.isRequired,
+    PropTypes.func,
+    PropTypes.object,
+  ]).isRequired,
+  delegated: PropTypes.object,
 };
 
 Filter.defaultProps = {
-
+  elementType: 'div',
 };
 
 export default Filter;

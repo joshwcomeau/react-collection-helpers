@@ -29,12 +29,11 @@ describe('Filter', () => {
 
       const wrapper = shallow(
         <Filter collection={collection} predicate={isOnSale}>
-          {({ id, name }) => <div key={id} id={id}>{name}</div>}
+          {({ id, name }) => <div key={id}>{name}</div>}
         </Filter>
       );
 
-      expect(wrapper.find('#a').length).to.equal(0);
-      expect(wrapper.find('#b').length).to.equal(1);
+      expect(wrapper.html()).to.equal('<div><div>Banana</div></div>');
     });
 
     it('filters by a predicate match object', () => {
@@ -47,12 +46,11 @@ describe('Filter', () => {
 
       const wrapper = shallow(
         <Filter collection={collection} predicate={{ name: 'Apple' }}>
-          {({ id, name }) => <div key={id} id={id}>{name}</div>}
+          {({ id, name }) => <div key={id}>{name}</div>}
         </Filter>
       );
 
-      expect(wrapper.find('#a').length).to.equal(1);
-      expect(wrapper.find('#b').length).to.equal(0);
+      expect(wrapper.html()).to.equal('<div><div>Apple</div></div>');
     });
   });
 });

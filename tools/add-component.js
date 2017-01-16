@@ -119,7 +119,7 @@ import { stub } from 'sinon';
 
 import ${ComponentName} from '../${ComponentName}';
 
-const { describe, it } = global;
+const { describe, context, it } = global;
 
 describe('${ComponentName}', () => {
   it('renders without incident', () => {

@@ -4,15 +4,19 @@ export default function sortBy({ collection, comparator, component }) {
   // For now, we don't accept comparators that aren't objects or functions.
   const type = Array.isArray(comparator) ? 'array' : typeof comparator;
 
+  // Array#sort is a mutative method. Given that we're supplying it props,
+  // we want to ensure we do not mutate it.
+  const collectionClone = collection.slice();
+
   switch (type) {
     case 'undefined':
-      return collection.sort();
+      return collectionClone.sort();
 
     case 'function':
-      return collection.sort(comparator);
+      return collectionClone.sort(comparator);
 
     case 'string':
-      return collection.sort((a, b) => {
+      return collectionClone.sort((a, b) => {
         const aVal = a[comparator];
         const bVal = b[comparator];
 

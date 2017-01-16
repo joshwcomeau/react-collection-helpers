@@ -42,6 +42,15 @@ describe('sortBy', () => {
 
       expect(actualResult).to.deep.equal(expectedResult);
     });
+
+    it('does not mutate the original array', () => {
+      const collection = ['oh', 'hi', 'mark'];
+      const collectionClone = collection.slice();
+
+      sortBy({ collection });
+
+      expect(collection).to.deep.equal(collectionClone);
+    });
   });
 
   context('with function comparators', () => {
@@ -63,7 +72,7 @@ describe('sortBy', () => {
       expect(actualResult).to.deep.equal(expectedResult);
     });
 
-    it('sorts descending with an ascending function', () => {
+    it('sorts descending with a descending function', () => {
       const collection = [
         { id: 'b', onSale: false },
         { id: 'a', onSale: true },
@@ -79,6 +88,21 @@ describe('sortBy', () => {
       const actualResult = sortBy({ collection, comparator });
 
       expect(actualResult).to.deep.equal(expectedResult);
+    });
+
+    it('does not mutate the original array', () => {
+      const collection = [
+        { id: 'b', onSale: false },
+        { id: 'a', onSale: true },
+        { id: 'c', onSale: false },
+      ];
+      const collectionClone = collection.slice();
+
+      const comparator = (a, b) => (a.id < b.id ? 1 : -1);
+
+      sortBy({ collection, comparator });
+
+      expect(collection).to.deep.equal(collectionClone);
     });
   });
 
@@ -121,6 +145,21 @@ describe('sortBy', () => {
       const actualResult = sortBy({ collection, comparator });
 
       expect(actualResult).to.deep.equal(expectedResult);
+    });
+
+    it('does not mutate the original array', () => {
+      const collection = [
+        { id: 'a', price: 5 },
+        { id: 'b', price: 10 },
+        { id: 'c', price: 7.50 },
+      ];
+      const collectionClone = collection.slice();
+
+      const comparator = 'price';
+
+      sortBy({ collection, comparator });
+
+      expect(collection).to.deep.equal(collectionClone);
     });
   });
 });

@@ -6,7 +6,11 @@ import { expect } from 'chai';
 
 import Sort from '../Sort';
 
+import { clearWhitespace } from '../../helpers/test.helpers';
+
+
 const { describe, it } = global;
+
 
 describe('Sort', () => {
   it('renders without incident', () => {
@@ -33,7 +37,13 @@ describe('Sort', () => {
         </Sort>
       );
 
-      expect(wrapper.html()).to.equal('<div><div>Apple</div><div>Banana</div><div>Cheese</div></div>');
+      expect(wrapper.html()).to.equal(clearWhitespace(`
+        <div>
+          <div>Apple</div>
+          <div>Banana</div>
+          <div>Cheese</div>
+        </div>
+      `));
     });
 
     it('sorts by a compare function', () => {
@@ -54,7 +64,13 @@ describe('Sort', () => {
         </Sort>
       );
 
-      expect(wrapper.html()).to.equal('<div><div>Apple</div><div>Banana</div><div>Cheese</div></div>');
+      expect(wrapper.html()).to.equal(clearWhitespace(`
+        <div>
+          <div>Apple</div>
+          <div>Banana</div>
+          <div>Cheese</div>
+        </div>
+      `));
     });
   });
 });

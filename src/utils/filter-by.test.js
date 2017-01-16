@@ -2,7 +2,7 @@
 import { expect } from 'chai';
 /* eslint-enable */
 
-import filterBy from './filterBy';
+import filterBy from './filter-by';
 
 const { describe, context, it } = global;
 

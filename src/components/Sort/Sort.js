@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 import '../../polyfills';
-import sortBy from '../../utils/sortBy';
+import sortBy from '../../utils/sort-by';
 
 import BaseCollectionHelper from '../BaseCollectionHelper';
 

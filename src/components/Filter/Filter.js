@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 
 import '../../polyfills';
-import filterBy from '../../utils/filterBy';
+import filterBy from '../../utils/filter-by';
 
 import BaseCollectionHelper from '../BaseCollectionHelper';
 

@@ -17,7 +17,7 @@ const sampleCollection = [
   { id: 'c', name: 'Carrot', price: 3.25 },
 ];
 
-describe.only('BaseCollectionHelper', () => {
+describe('BaseCollectionHelper', () => {
   context('with a function as children', () => {
     it('renders out the collection, based on children function', () => {
       const wrapper = shallow(

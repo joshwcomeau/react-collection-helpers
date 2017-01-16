@@ -2,7 +2,7 @@
 import { expect } from 'chai';
 /* eslint-enable */
 
-import sortBy from './sortBy';
+import sortBy from './sort-by';
 
 const { describe, context, it } = global;
 

@@ -1,12 +1,18 @@
 import { createElement, isValidElement, cloneElement, PropTypes } from 'react';
 
 import '../../polyfills';
+import { isCollectionHelper } from '../../helpers/misc.helpers';
+import {
+  unknownChildPassedToCollectionHelper,
+} from '../../helpers/error-message.helpers';
 
 
 const BaseCollectionHelper = ({ collection, children, elementType, delegated }) => {
   if (isValidElement(children)) {
-    // TODO: Check to make sure it's one of ours.
-    console.log(children.type.displayName);
+    // Check to make sure it's one of ours.
+    if (!isCollectionHelper(children)) {
+      throw new Error(unknownChildPassedToCollectionHelper(children));
+    }
 
     return cloneElement(
       children,

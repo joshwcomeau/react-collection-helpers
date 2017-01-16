@@ -5,7 +5,7 @@ import { expect } from 'chai';
 import { stub } from 'sinon';
 /* eslint-enable */
 
-import Filter from '../Filter';
+import Filter from './Filter';
 import Sort from '../Sort';
 
 const { describe, it } = global;

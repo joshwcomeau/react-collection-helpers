@@ -118,7 +118,6 @@ import { stub } from 'sinon';
 /* eslint-enable */
 
 import ${ComponentName} from '../${ComponentName}';
-import { MockContext } from '../../helpers/test.helpers';
 
 const { describe, it } = global;
 

@@ -3,6 +3,7 @@ import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 
 import Filter from '../Filter';
+import Sort from '../Sort';
 import FilterController from '../../helpers/story/FilterController';
 
 
@@ -42,5 +43,29 @@ storiesOf('Filter', module)
         filterControls={['inStock', 'taxFree', 'onSale']}
         elementType={ShopItem}
       />
+    );
+  })
+  .add('with nested Sort', () => {
+    const collection = [
+      { id: 'a', name: 'Apple', price: 5 },
+      { id: 'b', name: 'Banana', price: 10.25 },
+      { id: 'c', name: 'Carrot', price: 4.50 },
+      { id: 'd', name: 'Dragonfruit', price: 7.50 },
+      { id: 'e', name: 'Eggplant', price: 12.75 },
+    ];
+
+    return (
+      <div>
+        <h3>Original collection:</h3>
+        {collection.map(item => <div>{item.name}, ${item.price}</div>)}
+
+        <h3>Filter out items over $10, sort by price</h3>
+
+        <Filter collection={collection} predicate={item => item.price < 10}>
+          <Sort comparator="price">
+            {item => <div>{item.name}, ${item.price}</div>}
+          </Sort>
+        </Filter>
+      </div>
     );
   });

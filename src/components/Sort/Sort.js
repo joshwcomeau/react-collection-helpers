@@ -1,41 +1,36 @@
-import { createElement, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
 import '../../polyfills';
 import sortBy from '../../utils/sortBy';
 
+import BaseCollectionHelper from '../BaseCollectionHelper';
 
-const Sort = ({ children, elementType, collection, comparator, delegated }) => {
+
+const Sort = (props) => {
+  const { collection, comparator, ...baseProps } = props;
+
   const sortedCollection = sortBy({
     collection,
     comparator,
     component: 'Sort',
   });
 
-  return createElement(
-    elementType,
-    delegated,
-    sortedCollection.map(children)
+  return (
+    <BaseCollectionHelper
+      collection={sortedCollection}
+      {...baseProps}
+    />
   );
 };
 
 Sort.displayName = 'ReactCollectionHelperSort';
 
 Sort.propTypes = {
-  children: PropTypes.func.isRequired,
-  elementType: PropTypes.oneOfType([
-    PropTypes.string, // For native nodes (eg. 'div')
-    PropTypes.func,   // For composite components (eg. TodoListItem)
-  ]).isRequired,
   collection: PropTypes.array.isRequired,
   comparator: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.func,
   ]),
-  delegated: PropTypes.object,
-};
-
-Sort.defaultProps = {
-  elementType: 'div',
 };
 
 export default Sort;

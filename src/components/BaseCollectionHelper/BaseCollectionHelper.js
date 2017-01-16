@@ -4,7 +4,6 @@ import '../../polyfills';
 
 
 const BaseCollectionHelper = ({ collection, children, elementType, delegated }) => {
-  console.log('Invoking', { collection, children, elementType, delegated });
   if (isValidElement(children)) {
     // TODO: Check to make sure it's one of ours.
     console.log(children.type.displayName);

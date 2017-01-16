@@ -1,1 +1,1 @@
-export const clearWhitespace = str => str.replace(/[\s\n]+/g, '');
+export const clearWhitespace = str => str.replace(/\n[\s]*/g, '');

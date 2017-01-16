@@ -6,19 +6,18 @@ import { stub } from 'sinon';
 /* eslint-enable */
 
 import BaseCollectionHelper from './BaseCollectionHelper';
-import Filter from '../Filter';
-import Sort from '../Sort';
 
 import { clearWhitespace } from '../../helpers/test.helpers';
 
-const { describe, context, it } = global;
-describe.only('BaseCollectionHelper', () => {
-  const sampleCollection = [
-    { id: 'a', name: 'Apple', price: 3.99 },
-    { id: 'b', name: 'Banana', price: 5 },
-    { id: 'c', name: 'Carrot', price: 3.25 },
-  ];
 
+const { describe, context, it } = global;
+const sampleCollection = [
+  { id: 'a', name: 'Apple', price: 3.99 },
+  { id: 'b', name: 'Banana', price: 5 },
+  { id: 'c', name: 'Carrot', price: 3.25 },
+];
+
+describe.only('BaseCollectionHelper', () => {
   context('with a function as children', () => {
     it('renders out the collection, based on children function', () => {
       const wrapper = shallow(
@@ -45,7 +44,7 @@ describe.only('BaseCollectionHelper', () => {
       // Admittedly, this is a weird way to nest. It's a simplification of a
       // real use-case, though.
       // Because these are the shallow tests, we're just testing prop passing.
-      // We check full rendering in the render tests below.
+      // We check full rendering in `test/composition.test.js`
       const wrapper = shallow(
         <BaseCollectionHelper collection={sampleCollection}>
           <BaseCollectionHelper>
@@ -67,22 +66,70 @@ describe.only('BaseCollectionHelper', () => {
     });
   });
 
-  describe('real-world examples', () => {
-    it('composes a Filter and a Sort', () => {
-      const wrapper = render(
-        <Filter collection={sampleCollection} predicate={item => item.price < 5}>
-          <Sort comparator="price">
-            {item => <div key={item.id}>{item.name}</div>}
-          </Sort>
-        </Filter>
+  describe('delegated props', () => {
+    it('passes props onto the wrapper div', () => {
+      const wrapper = shallow(
+        <BaseCollectionHelper
+          collection={sampleCollection}
+          delegated={{
+            className: 'wrapper',
+            style: { padding: 10 },
+          }}
+        >
+          {item => <div key={item.id}>{item.name}</div>}
+        </BaseCollectionHelper>
       );
 
       const actualOutput = wrapper.html();
       const expectedOutput = clearWhitespace(`
-        <div>
-          <div>Carrot</div>
+        <div class="wrapper" style="padding:10px;">
           <div>Apple</div>
+          <div>Banana</div>
+          <div>Carrot</div>
         </div>
+      `);
+
+      expect(actualOutput).to.equal(expectedOutput);
+    });
+  });
+
+  describe('wrapper element type', () => {
+    it('supports using an alternate DOM node type', () => {
+      const wrapper = shallow(
+        <BaseCollectionHelper collection={sampleCollection} elementType="ul">
+          {item => <li key={item.id}>{item.name}</li>}
+        </BaseCollectionHelper>
+      );
+
+      const actualOutput = wrapper.html();
+      const expectedOutput = clearWhitespace(`
+        <ul>
+          <li>Apple</li>
+          <li>Banana</li>
+          <li>Carrot</li>
+        </ul>
+      `);
+
+      expect(actualOutput).to.equal(expectedOutput);
+    });
+
+    it('supports using an alternate composite component', () => {
+      // eslint-disable-next-line react/prop-types
+      const List = ({ children }) => <ul>{children}</ul>;
+
+      const wrapper = shallow(
+        <BaseCollectionHelper collection={sampleCollection} elementType={List}>
+          {item => <li key={item.id}>{item.name}</li>}
+        </BaseCollectionHelper>
+      );
+
+      const actualOutput = wrapper.html();
+      const expectedOutput = clearWhitespace(`
+        <ul>
+          <li>Apple</li>
+          <li>Banana</li>
+          <li>Carrot</li>
+        </ul>
       `);
 
       expect(actualOutput).to.equal(expectedOutput);

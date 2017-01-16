@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 
 import '../../polyfills';
+import { DISPLAY_NAME_PREFIX } from '../../constants';
 import sortBy from '../../utils/sort-by';
 
 import BaseCollectionHelper from '../BaseCollectionHelper';
@@ -23,7 +24,7 @@ const Sort = (props) => {
   );
 };
 
-Sort.displayName = 'ReactCollectionHelperSort';
+Sort.displayName = `${DISPLAY_NAME_PREFIX}Sort`;
 
 Sort.propTypes = {
   collection: PropTypes.array.isRequired,

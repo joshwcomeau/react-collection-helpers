@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 
 import '../../polyfills';
+import { DISPLAY_NAME_PREFIX } from '../../constants';
 import filterBy from '../../utils/filter-by';
 
 import BaseCollectionHelper from '../BaseCollectionHelper';
@@ -23,7 +24,7 @@ const Filter = (props) => {
   );
 };
 
-Filter.displayName = 'ReactCollectionHelperFilter';
+Filter.displayName = `${DISPLAY_NAME_PREFIX}Filter`;
 
 Filter.propTypes = {
   collection: PropTypes.array.isRequired,

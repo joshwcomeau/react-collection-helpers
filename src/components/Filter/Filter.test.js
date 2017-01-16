@@ -2,11 +2,9 @@
 import React from 'react';
 import { shallow, render, mount } from 'enzyme';
 import { expect } from 'chai';
-import { stub } from 'sinon';
 /* eslint-enable */
 
 import Filter from './Filter';
-import Sort from '../Sort';
 
 const { describe, it } = global;
 

@@ -27,7 +27,7 @@ const Sort = (props) => {
 Sort.displayName = `${DISPLAY_NAME_PREFIX}Sort`;
 
 Sort.propTypes = {
-  collection: PropTypes.array.isRequired,
+  collection: PropTypes.array,
   comparator: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.func,

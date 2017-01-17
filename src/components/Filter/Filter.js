@@ -27,7 +27,7 @@ const Filter = (props) => {
 Filter.displayName = `${DISPLAY_NAME_PREFIX}Filter`;
 
 Filter.propTypes = {
-  collection: PropTypes.array.isRequired,
+  collection: PropTypes.array,
   predicate: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.object,

@@ -4,35 +4,57 @@ import { shallow, render, mount } from 'enzyme';
 import { expect } from 'chai';
 /* eslint-enable */
 
-import Sort from '../Sort';
+import First from '../First';
 
 import { clearWhitespace } from '../../helpers/test.helpers';
 
 const { describe, it } = global;
 
 
-describe('Sort', () => {
+describe('First', () => {
   it('renders without incident', () => {
     const wrapper = shallow(
-      <Sort collection={[]} comparator={() => {}}>
+      <First collection={[]}>
         {() => {}}
-      </Sort>
+      </First>
     );
 
     expect(wrapper).to.be.ok;
   });
 
-  it('sorts by an object property when provided a string', () => {
+  it('selects the first item by default', () => {
     const collection = [
-      { id: 'b', name: 'Banana' },
       { id: 'a', name: 'Apple' },
+      { id: 'b', name: 'Banana' },
       { id: 'c', name: 'Carrot' },
     ];
 
     const wrapper = shallow(
-      <Sort collection={collection} comparator="name">
+      <First collection={collection}>
         {({ id, name }) => <div key={id}>{name}</div>}
-      </Sort>
+      </First>
+    );
+
+    expect(wrapper.html()).to.equal(clearWhitespace(`
+      <div>
+        <div>Apple</div>
+      </div>
+    `));
+  });
+
+  it('selects the first 3 items when a quantity is specified', () => {
+    const collection = [
+      { id: 'a', name: 'Apple' },
+      { id: 'b', name: 'Banana' },
+      { id: 'c', name: 'Carrot' },
+      { id: 'd', name: 'Dragonfruit' },
+      { id: 'e', name: 'Eggplant' },
+    ];
+
+    const wrapper = shallow(
+      <First collection={collection} num={3}>
+        {({ id, name }) => <div key={id}>{name}</div>}
+      </First>
     );
 
     expect(wrapper.html()).to.equal(clearWhitespace(`
@@ -44,22 +66,19 @@ describe('Sort', () => {
     `));
   });
 
-  it('sorts by a compare function', () => {
-    // More advanced tests for the sorting logic itself can be found in
-    // src/utils/sort-by.test.js
+  it('returns all items when a num higher than the total is provided', () => {
     const collection = [
-      { id: 'b', name: 'Banana' },
       { id: 'a', name: 'Apple' },
+      { id: 'b', name: 'Banana' },
       { id: 'c', name: 'Carrot' },
+      { id: 'd', name: 'Dragonfruit' },
+      { id: 'e', name: 'Eggplant' },
     ];
 
     const wrapper = shallow(
-      <Sort
-        collection={collection}
-        comparator={(a, b) => (a.id < b.id ? -1 : 1)}
-      >
+      <First collection={collection} num={10}>
         {({ id, name }) => <div key={id}>{name}</div>}
-      </Sort>
+      </First>
     );
 
     expect(wrapper.html()).to.equal(clearWhitespace(`
@@ -67,6 +86,8 @@ describe('Sort', () => {
         <div>Apple</div>
         <div>Banana</div>
         <div>Carrot</div>
+        <div>Dragonfruit</div>
+        <div>Eggplant</div>
       </div>
     `));
   });

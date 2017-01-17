@@ -22,7 +22,7 @@ function run(ComponentName) {
 
   const componentDirectory = path.join(
     __dirname,
-    '../../src/components',
+    '../src/components',
     ComponentName
   );
   createDirectory(componentDirectory);
@@ -62,7 +62,7 @@ function createDirectory(componentDirectory) {
   try {
     fs.mkdirSync(componentDirectory);
   } catch (err) {
-    throw new Error(`Sorry, it appears the component ${ComponentName} already exists!`);
+    throw new Error(err);
   }
 
   return componentDirectory;

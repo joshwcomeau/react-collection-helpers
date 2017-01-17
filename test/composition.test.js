@@ -7,6 +7,7 @@ import { expect } from 'chai';
 import Filter from '../src/components/Filter';
 import Sort from '../src/components/Sort';
 import First from '../src/components/First';
+import Last from '../src/components/Last';
 
 import { clearWhitespace } from '../src/helpers/test.helpers';
 
@@ -98,6 +99,48 @@ describe('composition', () => {
 
     const actualOutput = wrapper.html();
     const expectedOutput = '<div></div>';
+
+    expect(actualOutput).to.equal(expectedOutput);
+  });
+
+  it('returns the last of the first', () => {
+    const wrapper = render(
+      <First num={3} collection={sampleCollection}>
+        <Last>
+          {item => <div key={item.id}>{item.name}</div>}
+        </Last>
+      </First>
+    );
+
+    const actualOutput = wrapper.html();
+    const expectedOutput = clearWhitespace(`
+      <div>
+        <div>Carrot</div>
+      </div>
+    `);
+
+    expect(actualOutput).to.equal(expectedOutput);
+  });
+
+  it('returns the middle item, with enough <First> and <Last>', () => {
+    const wrapper = render(
+      <First num={4} collection={sampleCollection}>
+        <Last num={3}>
+          <First num={2}>
+            <Last>
+              {item => <div key={item.id}>{item.name}</div>}
+            </Last>
+          </First>
+        </Last>
+      </First>
+    );
+
+    const actualOutput = wrapper.html();
+    const expectedOutput = clearWhitespace(`
+      <div>
+        <div>Carrot</div>
+      </div>
+    `);
 
     expect(actualOutput).to.equal(expectedOutput);
   });

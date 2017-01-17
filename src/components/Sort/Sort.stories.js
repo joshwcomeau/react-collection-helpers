@@ -27,7 +27,6 @@ storiesOf('Sort', module)
       }
 
       changeOrder(ev) {
-        console.log({ order: ev.target.id });
         this.setState({ order: ev.target.id });
       }
 

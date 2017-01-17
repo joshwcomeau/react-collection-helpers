@@ -7,9 +7,7 @@ import filterBy from '../../utils/filter-by';
 import BaseCollectionHelper from '../BaseCollectionHelper';
 
 
-const Filter = (props) => {
-  const { collection, predicate, ...baseProps } = props;
-
+const Filter = ({ collection, predicate, ...baseProps }) => {
   const filteredCollection = filterBy({
     collection,
     predicate,

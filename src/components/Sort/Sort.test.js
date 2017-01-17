@@ -8,7 +8,6 @@ import Sort from '../Sort';
 
 import { clearWhitespace } from '../../helpers/test.helpers';
 
-
 const { describe, it } = global;
 
 
@@ -23,54 +22,52 @@ describe('Sort', () => {
     expect(wrapper).to.be.ok;
   });
 
-  describe('sorted children', () => {
-    it('sorts by an object property when provided a string', () => {
-      const collection = [
-        { id: 'b', name: 'Banana' },
-        { id: 'a', name: 'Apple' },
-        { id: 'c', name: 'Cheese' },
-      ];
+  it('sorts by an object property when provided a string', () => {
+    const collection = [
+      { id: 'b', name: 'Banana' },
+      { id: 'a', name: 'Apple' },
+      { id: 'c', name: 'Cheese' },
+    ];
 
-      const wrapper = shallow(
-        <Sort collection={collection} comparator="name">
-          {({ id, name }) => <div key={id}>{name}</div>}
-        </Sort>
-      );
+    const wrapper = shallow(
+      <Sort collection={collection} comparator="name">
+        {({ id, name }) => <div key={id}>{name}</div>}
+      </Sort>
+    );
 
-      expect(wrapper.html()).to.equal(clearWhitespace(`
-        <div>
-          <div>Apple</div>
-          <div>Banana</div>
-          <div>Cheese</div>
-        </div>
-      `));
-    });
+    expect(wrapper.html()).to.equal(clearWhitespace(`
+      <div>
+        <div>Apple</div>
+        <div>Banana</div>
+        <div>Cheese</div>
+      </div>
+    `));
+  });
 
-    it('sorts by a compare function', () => {
-      // More advanced tests for the sorting logic itself can be found in
-      // src/utils/sort-by.test.js
-      const collection = [
-        { id: 'b', name: 'Banana' },
-        { id: 'a', name: 'Apple' },
-        { id: 'c', name: 'Cheese' },
-      ];
+  it('sorts by a compare function', () => {
+    // More advanced tests for the sorting logic itself can be found in
+    // src/utils/sort-by.test.js
+    const collection = [
+      { id: 'b', name: 'Banana' },
+      { id: 'a', name: 'Apple' },
+      { id: 'c', name: 'Cheese' },
+    ];
 
-      const wrapper = shallow(
-        <Sort
-          collection={collection}
-          comparator={(a, b) => (a.id < b.id ? -1 : 1)}
-        >
-          {({ id, name }) => <div key={id}>{name}</div>}
-        </Sort>
-      );
+    const wrapper = shallow(
+      <Sort
+        collection={collection}
+        comparator={(a, b) => (a.id < b.id ? -1 : 1)}
+      >
+        {({ id, name }) => <div key={id}>{name}</div>}
+      </Sort>
+    );
 
-      expect(wrapper.html()).to.equal(clearWhitespace(`
-        <div>
-          <div>Apple</div>
-          <div>Banana</div>
-          <div>Cheese</div>
-        </div>
-      `));
-    });
+    expect(wrapper.html()).to.equal(clearWhitespace(`
+      <div>
+        <div>Apple</div>
+        <div>Banana</div>
+        <div>Cheese</div>
+      </div>
+    `));
   });
 });

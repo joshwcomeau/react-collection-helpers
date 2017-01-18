@@ -16,4 +16,10 @@ module.exports = {
       enzyme: true,
     },
   },
+
+  karma: {
+    testDirs: [
+      'src/polyfills.js',
+    ]
+  }
 };

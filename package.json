@@ -38,10 +38,11 @@
     "react": "0.14.x || 15.x"
   },
   "devDependencies": {
+    "@kadira/storybook": "2.21.0",
     "nwb": "0.14.x",
+    "nwb-sass": "^0.7.0",
     "react": "15.4.2",
-    "react-dom": "15.4.2",
-    "@kadira/storybook": "2.21.0"
+    "react-dom": "15.4.2"
   },
   "author": "Joshua Comeau <joshwcomeau@gmail.com>",
   "license": "MIT",

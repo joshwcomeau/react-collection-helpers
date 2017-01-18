@@ -1,15 +1,16 @@
-import React from 'react'
-import {render} from 'react-dom'
+import React from 'react';
+import { render } from 'react-dom';
 
-import Component from '../../src'
+import App from './components/App';
+import Header from './components/Header';
 
-let Demo = React.createClass({
-  render() {
-    return <div>
-      <h1>react-collection-helpers Demo</h1>
-      <Component/>
-    </div>
-  }
-})
+import { Filter, Find, First } from '../../src';
+
+
+const Demo = () => (
+  <App>
+    <Header />
+  </App>
+);
 
 render(<Demo/>, document.querySelector('#demo'))

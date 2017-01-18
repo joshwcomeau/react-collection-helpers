@@ -5,6 +5,7 @@ import { expect } from 'chai';
 /* eslint-enable */
 
 import BaseCollectionHelper from './BaseCollectionHelper';
+import Filter from '../Filter';
 
 import { clearWhitespace } from '../../helpers/test.helpers';
 
@@ -40,16 +41,38 @@ describe('BaseCollectionHelper', () => {
   });
 
   context('with an element as children', () => {
+    it('throws when a native element is provided as children', () => {
+      const wrapper = shallow.bind(null,
+        <BaseCollectionHelper collection={sampleCollection}>
+          <div>
+            Hi!
+          </div>
+        </BaseCollectionHelper>
+      );
+
+      expect(wrapper).to.throw(/unknown child/);
+    });
+
+    it('throws when a composite element is provided as children', () => {
+      const Child = ({ children }) => <div>{children}</div>;
+
+      const wrapper = shallow.bind(null,
+        <BaseCollectionHelper collection={sampleCollection}>
+          <Child>
+            Hi!
+          </Child>
+        </BaseCollectionHelper>
+      );
+
+      expect(wrapper).to.throw(/unknown child/);
+    });
+
     it('returns a clone of the child, passing along the collection', () => {
-      // Admittedly, this is a weird way to nest. It's a simplification of a
-      // real use-case, though.
-      // Because these are the shallow tests, we're just testing prop passing.
-      // We check full rendering in `test/composition.test.js`
       const wrapper = shallow(
         <BaseCollectionHelper collection={sampleCollection}>
-          <BaseCollectionHelper>
+          <Filter predicate={() => true}>
             {item => <div key={item.id}>{item.name}</div>}
-          </BaseCollectionHelper>
+          </Filter>
         </BaseCollectionHelper>
       );
 

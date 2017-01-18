@@ -1,1 +1,10 @@
+export { BaseCollectionHelper } from './components/BaseCollectionHelper';
+export { Every } from './components/Every';
 export { Filter } from './components/Filter';
+export { Find } from './components/Find';
+export { First } from './components/First';
+export { Last } from './components/Last';
+export { Map } from './components/Map';
+export { Reverse } from './components/Reverse';
+export { Some } from './components/Some';
+export { Sort } from './components/Sort';

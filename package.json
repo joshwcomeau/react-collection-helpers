@@ -1,11 +1,30 @@
 {
   "name": "react-collection-helpers",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "React Collection Helpers Component",
   "main": "lib/index.js",
   "module": "es/index.js",
   "files": [
-    "css",
+    "es/components/BaseCollectionHelper",
+    "es/components/Every",
+    "es/components/Filter",
+    "es/components/Find",
+    "es/components/First",
+    "es/components/Last",
+    "es/components/Map",
+    "es/components/Reverse",
+    "es/components/Some",
+    "es/components/Sort",
+    "lib/components/BaseCollectionHelper",
+    "lib/components/Every",
+    "lib/components/Filter",
+    "lib/components/Find",
+    "lib/components/First",
+    "lib/components/Last",
+    "lib/components/Map",
+    "lib/components/Reverse",
+    "lib/components/Some",
+    "lib/components/Sort",
     "es",
     "lib",
     "umd"
@@ -21,7 +40,11 @@
     "add-component": "NODE_ENV=development node tools/add-component.js",
     "build-storybook": "build-storybook"
   },
-  "dependencies": {
+  "peerDependencies": {
+    "react": "0.14.x || 15.x"
+  },
+  "devDependencies": {
+    "@kadira/storybook": "2.21.0",
     "babel-eslint": "6.1.2",
     "change-case": "3.0.0",
     "chai": "3.5.0",
@@ -32,22 +55,21 @@
     "eslint-plugin-jsx-a11y": "2.2.2",
     "eslint-plugin-react": "6.3.0",
     "jsdom": "9.5.0",
-    "react-addons-test-utils": "15.3.2"
-  },
-  "peerDependencies": {
-    "react": "0.14.x || 15.x"
-  },
-  "devDependencies": {
-    "@kadira/storybook": "2.21.0",
     "nwb": "0.14.x",
-    "nwb-sass": "^0.7.0",
+    "nwb-sass": "0.7.0",
     "react": "15.4.2",
-    "react-dom": "15.4.2"
+    "react-dom": "15.4.2",
+    "react-addons-test-utils": "15.3.2"
   },
   "author": "Joshua Comeau <joshwcomeau@gmail.com>",
   "license": "MIT",
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joshwcomeau/react-collection-helpers.git"
+  },
   "keywords": [
-    "react-component"
+    "react",
+    "react-component",
+    "lodash"
   ]
 }

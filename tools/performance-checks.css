@@ -1,0 +1,16 @@
+@keyframes wobble {
+  0% { transform: translate(0, -5px); }
+  25% { transform: translate(-5px, 0); }
+  50% { transform: translate(0, 5px); }
+  75% { transform: translate(5px, 0); }
+  100% { transform: translate(0, -5px); }
+}
+
+.SideAnimation {
+  width: 10px;
+  height: 10px;
+  margin: 10px;
+  background: blue;
+  border-radius: 100%;
+  animation: wobble 1s linear infinite;
+}

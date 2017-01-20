@@ -2,5 +2,18 @@
 
 .Header {
   position: relative;
-  background: $navy;
+  color: $black;
+  padding-bottom: 3rem;
+
+  h1 {
+    color: $red;
+    letter-spacing: -1px;
+    -webkit-font-smoothing: antialiased;
+    padding-bottom: 0.25rem;
+  }
+
+  .intro {
+    font-size: 20px;
+    color: $black;
+  }
 }

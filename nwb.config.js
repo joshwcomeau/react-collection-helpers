@@ -15,6 +15,9 @@ module.exports = {
     compat: {
       enzyme: true,
     },
+    html: {
+      template: 'demo/index.html',
+    },
   },
 
   karma: {

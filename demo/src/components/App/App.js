@@ -109,7 +109,7 @@ const App = ({ children }) => (
       </p>
 
       <p>
-        As of the time of writing, there are 9 helper components in total. The examples in this demo are just a sample of what can currently be done.
+        As of the time of writing, there are 10 helper components in total. The examples in this demo are just a sample of what can currently be done.
       </p>
 
       <p>

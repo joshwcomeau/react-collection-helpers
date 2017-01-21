@@ -45,7 +45,7 @@ const App = ({ children }) => (
 
       <h4>See It In Action</h4>
       <p>
-        Let’s say we’re building a chat application. We receive the following list of users:
+        Let’s say we’re building a chat application. We’ve got the following list of users:
       </p>
 
       <FiddleEmbed fiddleId="f8eyvge9" panes={['js']} revision={4} />
@@ -109,7 +109,7 @@ const App = ({ children }) => (
       </p>
 
       <p>
-        As of the time of writing, there are 9 Collection Helpers in total. The examples in this demo are just a sample of what can currently be done.
+        As of the time of writing, there are 9 helper components in total. The examples in this demo are just a sample of what can currently be done.
       </p>
 
       <p>

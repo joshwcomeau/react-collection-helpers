@@ -5,6 +5,7 @@ import './FiddleEmbed.scss';
 
 const FiddleEmbed = ({
   fiddleId,
+  height,
   revision,
   panes,
   bodyColor,
@@ -25,10 +26,10 @@ const FiddleEmbed = ({
   console.log({ url })
 
   return (
-    <div className="FiddleEmbed">
+    <div className="FiddleEmbed" style={{ height }}>
       <iframe
         width="100%"
-        height="300"
+        height={height}
         src={url}
         allowFullScreen="allowfullscreen"
         frameBorder="0"
@@ -39,6 +40,7 @@ const FiddleEmbed = ({
 
 FiddleEmbed.propTypes = {
   fiddleId: PropTypes.string.isRequired,
+  height: PropTypes.number.isRequired,
   panes: PropTypes.arrayOf(PropTypes.oneOf([
     'js',
     'html',
@@ -52,6 +54,7 @@ FiddleEmbed.propTypes = {
 }
 
 FiddleEmbed.defaultProps = {
+  height: 300,
   panes: ['js', 'result'],
   bodyColor: 'FFFFFF',
   accentColor: '3498DB',

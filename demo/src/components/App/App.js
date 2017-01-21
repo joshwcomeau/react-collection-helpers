@@ -54,9 +54,10 @@ const App = ({ children }) => (
         The first thing we might want to do is filter the list so we only show users who are online. For this, we’ll need our friend, the <ComponentName>Filter</ComponentName> component:
       </p>
 
-      <FiddleEmbed fiddleId="465b0egv" revision={6} />
+      <FiddleEmbed fiddleId="465b0egv" height={225} revision={6} />
 
       <p>Our <ComponentName>Filter</ComponentName> takes 3 params:</p>
+
       <ol>
         <li>
           <strong className="mono">collection</strong> - the array of items we want to render
@@ -74,11 +75,51 @@ const App = ({ children }) => (
       </p>
 
       <p>
-        Thankfully, <strong>React Collection Helpers are composable</strong>. Here’s how we do it:
+        Thankfully, <strong>React Collection Helpers are composable</strong>. Here’s how we do it, using a <ComponentName>Sort</ComponentName> component:
       </p>
 
-      <FiddleEmbed fiddleId="d3da14hy" revision={3} />
+      <FiddleEmbed fiddleId="d3da14hy" height={265} revision={4} />
 
+      <p>
+        In the author’s humble opinion, it’s here that this set of utility components goes from a novelty to something genuinely useful.
+      </p>
+      <p>
+        Nested components have the collections passed through automatically, and just need to define the attributes needed to modify it.
+      </p>
+      <p>
+        The <ComponentName>Sort</ComponentName> component accepts the following props:
+      </p>
+
+      <ol>
+        <li>
+          <strong className="mono">collection</strong> - supplied automatically by the parent <ComponentName>Filter</ComponentName> component.
+        </li>
+        <li>
+          <strong className="mono">comparator</strong> - a matcher that will determine how to sort the collection. Typically, you would pass it a {'function'}, similar to how <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">Array#sort</a> works. In this case, however, we’ve supplied a string shorthand, specifying which property we want to sort by.
+        </li>
+        <li>
+          <strong className="mono">descending</strong> - by default, when using the 'string' shorthand for <span className="mono">comparator</span>, it will be sorted in ascending order. In this case, we want it sorted in descending order. The <span className="mono">descending</span> boolean prop allows us to make this distinction.
+        </li>
+      </ol>
+
+      <h4>Conclusion</h4>
+
+      <p>
+        React Collection Helpers is an experiment that explores the power of React’s component model. It attempts to allow components to be comprised entirely of easy-to-read, designer-friendly JSX, while still giving developers the full power of Javascript, and without any performance compromises.
+      </p>
+
+      <p>
+        As of the time of writing, there are 9 Collection Helpers in total. The examples in this demo are just a sample of what can currently be done.
+      </p>
+
+      <p>
+        That said, React Collection Helpers is still in its infancy, and I’m still learning how it can best solve common problems. I suspect we’re still only scratching the surface of what this can be used for.</p>
+
+      <p>
+        Have feedback? Ideas? Criticism? Want to help build this?
+        {' '}
+        <a href="https://github.com/joshwcomeau/react-collection-helpers">Let’s talk.</a>
+      </p>
     </MaxWidthWrapper>
   </div>
 );

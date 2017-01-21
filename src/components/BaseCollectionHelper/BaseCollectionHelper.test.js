@@ -94,10 +94,8 @@ describe('BaseCollectionHelper', () => {
       const wrapper = shallow(
         <BaseCollectionHelper
           collection={sampleCollection}
-          delegated={{
-            className: 'wrapper',
-            style: { padding: 10 },
-          }}
+          className="wrapper"
+          style={{ padding: 10 }}
         >
           {item => <div key={item.id}>{item.name}</div>}
         </BaseCollectionHelper>

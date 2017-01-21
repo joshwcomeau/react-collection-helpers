@@ -7,7 +7,7 @@ import {
 } from '../../helpers/error-message.helpers';
 
 
-const BaseCollectionHelper = ({ collection, children, elementType, delegated }) => {
+const BaseCollectionHelper = ({ collection, children, elementType, ...delegated }) => {
   if (isValidElement(children)) {
     // Check to make sure it's one of ours.
     if (!isCollectionHelper(children)) {
@@ -39,7 +39,6 @@ BaseCollectionHelper.propTypes = {
     PropTypes.func,   // For composite components (eg. TodoListItem)
   ]).isRequired,
   collection: PropTypes.array.isRequired,
-  delegated: PropTypes.object,
 };
 
 BaseCollectionHelper.defaultProps = {

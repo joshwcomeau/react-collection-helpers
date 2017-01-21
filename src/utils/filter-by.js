@@ -1,12 +1,25 @@
 import { invalidTypeSuppliedAsPredicate } from '../helpers/error-message.helpers';
 
+
+function efficientFilter(collection, predicate) {
+  const matches = [];
+
+  for (let i = 0; i < collection.length; i++) {
+    if (predicate(collection[i])) {
+      matches.push(collection[i]);
+    }
+  }
+
+  return matches;
+}
+
 export default function filterBy({ collection, predicate, component }) {
   // For now, we don't accept predicates that aren't objects or functions.
   const type = Array.isArray(predicate) ? 'array' : typeof predicate;
 
   switch (type) {
     case 'function':
-      return collection.filter(predicate);
+      return efficientFilter(collection, predicate);
 
     case 'object':
       // Objects are tricky.
@@ -16,7 +29,7 @@ export default function filterBy({ collection, predicate, component }) {
       //   - should be matched by { name: 'apple' }
       //   - should not be matched by { name: 'orange' }
       //   - should not be matched by { name: 'apple', onSale: true }
-      return collection.filter(item => (
+      return efficientFilter(collection, item => (
         Object.keys(predicate).every(key => predicate[key] === item[key])
       ));
 

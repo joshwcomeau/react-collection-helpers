@@ -1,6 +1,6 @@
 import { invalidTypeSuppliedAsComparator } from '../helpers/error-message.helpers';
 
-export default function sortBy({ collection, comparator, component }) {
+export default function sortBy({ collection, comparator, descending, component }) {
   // For now, we don't accept comparators that aren't objects or functions.
   const type = Array.isArray(comparator) ? 'array' : typeof comparator;
 
@@ -24,7 +24,9 @@ export default function sortBy({ collection, comparator, component }) {
           return 0;
         }
 
-        return aVal < bVal ? -1 : 1;
+        const result = aVal < bVal ? -1 : 1;
+
+        return descending ? result * -1 : result;
       });
 
     default:

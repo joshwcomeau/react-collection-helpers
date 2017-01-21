@@ -90,6 +90,25 @@ describe('sortBy', () => {
       expect(actualResult).to.deep.equal(expectedResult);
     });
 
+    it('ignores the `descending` prop when a function is provided', () => {
+      const collection = [
+        { id: 'b', onSale: false },
+        { id: 'a', onSale: true },
+        { id: 'c', onSale: false },
+      ];
+      const comparator = (a, b) => (a.id < b.id ? -1 : 1);
+      const descending = true;
+
+      const expectedResult = [
+        { id: 'a', onSale: true },
+        { id: 'b', onSale: false },
+        { id: 'c', onSale: false },
+      ];
+      const actualResult = sortBy({ collection, comparator, descending });
+
+      expect(actualResult).to.deep.equal(expectedResult);
+    });
+
     it('does not mutate the original array', () => {
       const collection = [
         { id: 'b', onSale: false },
@@ -121,6 +140,25 @@ describe('sortBy', () => {
         { id: 'b', price: 10 },
       ];
       const actualResult = sortBy({ collection, comparator });
+
+      expect(actualResult).to.deep.equal(expectedResult);
+    });
+
+    it('sorts descending by property when specified', () => {
+      const collection = [
+        { id: 'a', price: 5 },
+        { id: 'b', price: 10 },
+        { id: 'c', price: 7.50 },
+      ];
+      const comparator = 'price';
+      const descending = true;
+
+      const expectedResult = [
+        { id: 'b', price: 10 },
+        { id: 'c', price: 7.50 },
+        { id: 'a', price: 5 },
+      ];
+      const actualResult = sortBy({ collection, comparator, descending });
 
       expect(actualResult).to.deep.equal(expectedResult);
     });

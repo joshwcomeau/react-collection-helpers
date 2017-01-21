@@ -1,6 +1,14 @@
 import { invalidTypeSuppliedAsPredicate } from '../helpers/error-message.helpers';
 
 
+function efficientFind(collection, predicate) {
+  for (let i = 0; i < collection.length; i++) {
+    if (predicate(collection[i])) {
+      return collection[i];
+    }
+  }
+}
+
 // TODO: This function is very similar to `filterBy`.
 // They should be combined; I just need to find the right abstraction.
 export default function findBy({ collection, predicate, component }) {
@@ -9,7 +17,7 @@ export default function findBy({ collection, predicate, component }) {
 
   switch (type) {
     case 'function':
-      return collection.find(predicate);
+      return efficientFind(collection, predicate);
 
     case 'object':
       // Objects are tricky.
@@ -19,7 +27,7 @@ export default function findBy({ collection, predicate, component }) {
       //   - should be matched by { name: 'apple' }
       //   - should not be matched by { name: 'orange' }
       //   - should not be matched by { name: 'apple', onSale: true }
-      return collection.find(item => (
+      return efficientFind(collection, item => (
         Object.keys(predicate).every(key => predicate[key] === item[key])
       ));
 

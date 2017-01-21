@@ -7,12 +7,11 @@ import sortBy from '../../utils/sort-by';
 import BaseCollectionHelper from '../BaseCollectionHelper';
 
 
-const Sort = (props) => {
-  const { collection, comparator, ...baseProps } = props;
-
+const Sort = ({ collection, comparator, descending, ...baseProps }) => {
   const sortedCollection = sortBy({
     collection,
     comparator,
+    descending,
     component: 'Sort',
   });
 
@@ -32,6 +31,7 @@ Sort.propTypes = {
     PropTypes.string,
     PropTypes.func,
   ]),
+  descending: PropTypes.bool,
 };
 
 export default Sort;

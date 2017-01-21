@@ -32,9 +32,7 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1.5;
 }
-ol, ul {
-	list-style: none;
-}
+
 blockquote, q {
 	quotes: none;
 }
@@ -64,6 +62,15 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Lora', serif;
   font-weight: bold;
+  margin-bottom: 0.4rem;
+}
+
+ol, ul {
+  padding: 1rem 2rem;
+}
+
+li {
+  margin-bottom: 1rem;
 }
 
 h1 {
@@ -92,4 +99,9 @@ h6 {
 
 p {
   color: $darkgray;
+  margin-bottom: 1.5rem;
+}
+
+.mono {
+  font-family: monospace;
 }

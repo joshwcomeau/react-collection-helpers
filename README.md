@@ -9,7 +9,7 @@
 
 ## Quick Example
 
-```js
+```jsx
 import { Filter, Sort, First } from 'react-collection-helpers';
 
 const users = [
@@ -85,7 +85,7 @@ UMD builds are also available via CDN:
 ### Importing
 Import the component(s) you need:
 
-```js
+```jsx
 // ES6 modules
 import { Find, Every, Map } from 'react-collection-helpers';
 
@@ -95,7 +95,7 @@ const { Find, Every, Map } = require('react-collection-helpers');
 
 Alternatively, you can import components individually, to avoid bundling the components you don't use:
 
-```js
+```jsx
 // React Collection Helpers share a lot of logic, and thus are each incredibly lightweight.
 // This technique often isn't necessary, but is provided for those with exceptionally tight budgets.
 import Find from 'react-collection-helpers/Find';
@@ -107,7 +107,7 @@ import Map from 'react-collection-helpers/Map';
 
 React Collection Helpers will create a wrapping element. For example:
 
-```js
+```jsx
 <ul className="list">
   <Filter collection={collection} predicate={predicate}>
     {item => <li>{item}</li>}
@@ -127,7 +127,7 @@ This isn't good! Fortunately, there is a solution: you can _customize the elemen
 
 The above example could be rewritten as:
 
-```js
+```jsx
 <Filter className="list" elementType="ul" collection={collection} predicate={predicate}>
   {item => <li>{item}</li>}
 </Filter>
@@ -143,7 +143,7 @@ We're specifying that the <Filter> should return a `<ul>` instead of the default
 
 You can even supply a composite component to use as wrapper:
 
-```js
+```jsx
 <Filter elementType={CustomList} collection={collection} predicate={predicate}>
   {item => <li>{item}</li>}
 </Filter>
@@ -151,7 +151,7 @@ You can even supply a composite component to use as wrapper:
 
 Another thing to note: **Only the bottom-most helper in a chain of helpers will create a wrapping element.** For example:
 
-```js
+```jsx
 <Filter collection={collection} predicate={predicate}>
   <Sort className="sort">
     {item => <div>{item}</div>}
@@ -176,7 +176,7 @@ Don't let the word `predicate` scare you. A predicate is simply a function that 
 
 For example, the following predicate will allow us to determine whether an item in a list is within our budget:
 
-```js
+```jsx
 const items = [
   { name: 'apple', price: 1.00 },
   { name: 'banana', price: 5.00 },
@@ -190,7 +190,7 @@ In this ridiculous example, we have a thousand bucks, so we can afford some frui
 
 We can apply this predicate with several different functions, in vanilla JS:
 
-```js
+```jsx
 const allAffordableItems = items.filter(isWithinBudgetPredicate);
 // -> [{ name: 'apple', price: 1.00 }, { name: 'banana', price: 5.00 }]
 
@@ -200,7 +200,7 @@ const firstAffordableItem = items.find(isWithinBudgetPredicate);
 
 In React Collection Helpers, it works much the same way:
 
-```js
+```jsx
 <Filter collection={items} predicate={isWithinBudgetPredicate}>
   {item => <div key={item.name}>{item.name} - ${item.price}</div>}
 </Filter>
@@ -223,7 +223,7 @@ In React Collection Helpers, it works much the same way:
 
 **Object short-hand**: Instead of passing a function, you can pass it an object that describes your requirement:
 
-```js
+```jsx
 const items = [
   { name: 'apple', price: 1.00, isOnSale: false },
   { name: 'banana', price: 2.50,  isOnSale: true },
@@ -264,7 +264,7 @@ Render the children if the predicate returns true for **every** child. A Fallbac
 
 #### Example
 
-```js
+```jsx
 const collection = [
   { id: 'a', src: '...', isLoaded: true },
   { id: 'b', src: '...', isLoaded: true },
@@ -295,7 +295,7 @@ Render only the children for which the predicate returns `true`.
 
 #### Example
 
-```js
+```jsx
 const collection = [
   { id: 'a', src: '...', isLoaded: true },
   { id: 'b', src: '...', isLoaded: true },

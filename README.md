@@ -48,19 +48,31 @@ ReactDOM.render(
 
 
 
-## Demo
+## Live Demo
 
-[See a live, editable demo.](TODO)
+[Play with a live demo.](https://joshwcomeau.github.io/react-collection-helpers/demo/dist/)
 
 
 
 ## Features
 
 - :sparkles: **Useful** - includes 10+ components to help you filter, sort, and slice collections.
-- :black_nib: **Designer-friendly** - Make your designers' lives easier by having functional components without complex inline logic.
+- :black_nib: **Designer-friendly** - make your designers' lives easier by writing components without complex inline logic.
 - :zap: **Tiny** - full build is only 2.5kb, and is modular so you can import only the components you need.
-- :muscle: **Performant** - stress tests have shown that there is zero perf cost to using these components over traditional methods.
-- :wrench: **Customizable** - The wrapper element can be any element type you'd like (native _or_ composite), and all non-recognized props are passed through. Composing Collection Helpers does not create additional HTML markup!
+- :muscle: **Performant** - there is [zero perf cost](https://github.com/joshwcomeau/react-collection-helpers/blob/master/tools/performance-checks.js) to using these components over traditional methods.
+- :wrench: **Customizable** - the wrapper element can be any element type you'd like (native _or_ composite), and all non-recognized props are passed through. Composing Collection Helpers does not create additional HTML markup!
+
+
+
+## Feedback Wanted
+
+This project is an experiment to test the usefulness of collection manipulators in component form factor.
+
+When I say that it's an experiment, I don't necessarily mean that it's _experimental_. I'm pretty confident that it's stable and safe to use in production; the code is quite simple.
+
+Rather, I mean that I'm not convinced that it solves a real problem. I'd like to hear from users who implement them; does it improve the development experience of you or your team? Do you think the idea has potential if it went in a certain direction? I'm open to exploring tangential ideas.
+
+Let me know on [Twitter](https://twitter.com/joshwcomeau), or [via email](mailto:joshwcomeau@gmail.com)
 
 
 
@@ -82,7 +94,6 @@ UMD builds are also available via CDN:
 
 ## Usage
 
-### Importing
 Import the component(s) you need:
 
 ```jsx
@@ -98,153 +109,19 @@ Alternatively, you can import components individually, to avoid bundling the com
 ```jsx
 // This method avoids bundling unused components, and reduces gzipped bundles
 // by about 1kb.
-import Find from 'react-collection-helpers/Find';
-import Every from 'react-collection-helpers/Every';
-import Map from 'react-collection-helpers/Map';
-```
-
-### Understanding and Customizing Markup
-
-React Collection Helpers will create a wrapping element. For example:
-
-```jsx
-<ul className="list">
-  <Filter collection={collection} predicate={predicate}>
-    {item => <li>{item}</li>}
-  </Filter>
-</ul>
-```
-... becomes ...
-```html
-<ul class="list">
-  <div> <!-- oh no! -->
-    <li>...</li>
-  </div>
-</ul>
-```
-
-This isn't good! Fortunately, there is a solution: you can _customize the element type_, as well as _delegate any props to the wrapping element_.
-
-The above example could be rewritten as:
-
-```jsx
-<Filter className="list" elementType="ul" collection={collection} predicate={predicate}>
-  {item => <li>{item}</li>}
-</Filter>
-```
-```html
-<ul class="list">
-  <li>...</li>
-</ul>
+import Find from 'react-collection-helpers/lib/components/Find';
+import Every from 'react-collection-helpers/lib/components/Every';
+import Map from 'react-collection-helpers/lib/components/Map';
 ```
 
 
-We're specifying that the <Filter> should return a `<ul>` instead of the default `<div>`, and we're applying a class name. This allows it to play nice with grid systems, since you can define Collection Helpers as rows.
+## Guides
 
-You can even supply a composite component to use as wrapper:
+Learn more about how best to use React Collection Helpers with these in-depth guides:
 
-```jsx
-<Filter elementType={CustomList} collection={collection} predicate={predicate}>
-  {item => <li>{item}</li>}
-</Filter>
-```
-
-Another thing to note: **Only the bottom-most helper in a chain of helpers will create a wrapping element.** For example:
-
-```jsx
-<Filter collection={collection} predicate={predicate}>
-  <Sort className="sort">
-    {item => <div>{item}</div>}
-  </Sort>
-</Filter>
-```
-```html
-<ul class="sort">
-  <div>...</div>
-</ul>
-```
-
-It's also worth mentioning that Fiber, React's upcoming reconciliation engine, will _remove this requirement_, by [allowing components to return arrays](https://twitter.com/threepointone/status/810058843325546496). In a future major version of React Collection Helpers, expect to not have any additional markup created.
-
-
-
-### Predicates
-
-Many React Collection Helpers ([`<Filter>`](#filter), [`<Find>`](#find), [`<Every>`](#every), and more) use a `predicate` prop to determine whether an item in a collection matches or not.
-
-Don't let the word `predicate` scare you. A predicate is simply a function that returns a boolean value.
-
-For example, the following predicate will allow us to determine whether an item in a list is within our budget:
-
-```jsx
-const items = [
-  { name: 'apple', price: 1.00 },
-  { name: 'banana', price: 5.00 },
-  { name: 'bugatti veyron', price: 1695000.00 },
-]
-
-const isWithinBudgetPredicate = item => item.price < 1000;
-```
-
-In this ridiculous example, we have a thousand bucks, so we can afford some fruit but not a supercar.
-
-We can apply this predicate with several different functions, in vanilla JS:
-
-```jsx
-const allAffordableItems = items.filter(isWithinBudgetPredicate);
-// -> [{ name: 'apple', price: 1.00 }, { name: 'banana', price: 5.00 }]
-
-const firstAffordableItem = items.find(isWithinBudgetPredicate);
-// -> { name: 'apple', price: 1.00 }
-```
-
-In React Collection Helpers, it works much the same way:
-
-```jsx
-<Filter collection={items} predicate={isWithinBudgetPredicate}>
-  {item => <div key={item.name}>{item.name} - ${item.price}</div>}
-</Filter>
-/*
-<div>
-  <div>apple - $1.00</div>
-  <div>banana - $5.00</div>
-</div>
-*/
-
-<Find collection={items} predicate={isWithinBudgetPredicate}>
-  {item => <div key={item.name}>{item.name} - ${item.price}</div>}
-</Find>
-/*
-<div>
-  <div>apple - $1.00</div>
-</div>
-*/
-```
-
-**Object short-hand**: Instead of passing a function, you can pass it an object that describes your requirement:
-
-```jsx
-const items = [
-  { name: 'apple', price: 1.00, isOnSale: false },
-  { name: 'banana', price: 2.50,  isOnSale: true },
-  { name: 'bugatti veyron', price: 500000, isOnSale: true },
-];
-
-<Filter collection={items} predicate={{ isOnSale: true }}>
-  {item => <div key={item.name}>{item.name} - ${item.price}</div>}
-</Filter>
-
-/*
-<div>
-  <div>banana - $2.50</div>
-  <div>bugatti veyron - $500000</div>
-</div>
-*/
-
-```
-
-This is often a more declarative way to present a predicate, if you're testing for a specific object value. Under the hood, it creates a predicate function based on this object and applies it in the same way.
-
+* [Understanding and Customizing Markup](https://github.com/joshwcomeau/react-collection-helpers/blob/master/documentation/markup.md)
+* [Predicates in React Collection Helpers](https://github.com/joshwcomeau/react-collection-helpers/blob/master/documentation/predicates.md)
+* [Comparators in React Collection Helpers](https://github.com/joshwcomeau/react-collection-helpers/blob/master/documentation/comparators.md)
 
 
 
@@ -259,7 +136,7 @@ Render the children if the predicate returns true for **every** child. A Fallbac
 | Prop         | Required | Types   | Notes    |
 |--------------|----------|---------|----------|
 | `collection` | ✓        | [`any`] | Can be implicitly passed by parent Collection Helpers
-| `predicate`  | ✓        | `function`/`object`| See [predicates](#predicates) for more information |
+| `predicate`  | ✓        | `function`/`object`| See [predicates](https://github.com/joshwcomeau/react-collection-helpers/tree/master/documentation/predicates.md) for more information |
 | `fallback`   | ✕        | `node` | Alternate content to be rendered if the predicate returns false on any items.
 
 #### Example
@@ -276,7 +153,7 @@ const collection = [
   predicate={{ isLoaded: true }}
   fallback={<span>Loading...</span>}
 >
-  {child => <img key={child.id} src={child.src} />}
+  {item => <img key={item.id} src={item.src} />}
 </Every>
 ```
 
@@ -291,25 +168,218 @@ Render only the children for which the predicate returns `true`.
 | Prop         | Required | Types   | Notes    |
 |--------------|----------|---------|----------|
 | `collection` | ✓        | [`any`] | Can be implicitly passed by parent Collection Helpers
-| `predicate`  | ✓        | `function`/`object`| See [predicates](#predicates) for more information |
+| `predicate`  | ✓        | `function`/`object`| See [predicates](https://github.com/joshwcomeau/react-collection-helpers/tree/master/documentation/predicates.md) for more information |
 
 #### Example
 
 ```jsx
 const collection = [
-  { id: 'a', src: '...', isLoaded: true },
-  { id: 'b', src: '...', isLoaded: true },
-  { id: 'c', src: '...', isLoaded: false },
+  { id: 'a', name: 'apple', price: 1.00 },
+  { id: 'b', name: 'banana', price: 5.00 },
+  { id: 'c', name: 'carrot', price: 2.50 },
 ];
 
-<Every
-  collection={collection}
-  predicate={{ isLoaded: true }}
-  fallback={<span>Loading...</span>}
->
-  {child => <img key={child.id} src={child.src} />}
-</Every>
+<Filter collection={collection} predicate={item => (item.price < 3)}>
+  {item => <div key={item.id}>{item.name}</div>}
+</Filter>
 ```
+
+
+### `<Find>`
+
+Render the first child for which the predicate returns `true`.
+
+
+#### Props
+
+| Prop         | Required | Types   | Notes    |
+|--------------|----------|---------|----------|
+| `collection` | ✓        | [`any`] | Can be implicitly passed by parent Collection Helpers
+| `predicate`  | ✓        | `function`/`object`| See [predicates](https://github.com/joshwcomeau/react-collection-helpers/tree/master/documentation/predicates.md) for more information |
+
+#### Example
+
+```jsx
+const collection = [
+  { id: 'a', name: 'John', isAdmin: false },
+  { id: 'b', name: 'Jane', isAdmin: true },
+  { id: 'c', name: 'Jala', isAdmin: false },
+];
+
+<Find collection={collection} predicate={{ isAdmin: true }}>
+  {user => <div key={user.id}>Your group's admin is {user.name}</div>}
+</Find>
+```
+
+
+### `<First>`
+
+Returns the first 1 or more items of the collection. Generally only useful as a child to another Collection Helper.
+
+
+#### Props
+
+| Prop         | Required | Types   | Notes    |
+|--------------|----------|---------|----------|
+| `collection` | ✓        | [`any`] | Can be implicitly passed by parent Collection Helpers
+| `num`        | ✕        | `number`| Defaults to `1` |
+
+#### Example
+
+```jsx
+const collection = [
+  { id: 'a', name: 'John', distance: 3.14 },
+  { id: 'b', name: 'Jane', distance: 0.45 },
+  { id: 'c', name: 'Jala', distance: 1.23 },
+];
+
+<Sort collection={collection} comparator="distance">
+  <First>
+    {user => <div key={user.id}>You are closest to {user.name}</div>}
+  </First>
+</Sort>
+```
+
+
+### `<Last>`
+
+Returns the last 1 or more items of the collection. The opposite of `<First>`. Generally only useful as a child to another Collection Helper.
+
+
+#### Props
+
+| Prop         | Required | Types   | Notes    |
+|--------------|----------|---------|----------|
+| `collection` | ✓        | [`any`] | Can be implicitly passed by parent Collection Helpers
+| `num`        | ✕        | `number`| Defaults to `1` |
+
+#### Example
+
+```jsx
+const collection = [
+  { id: 'a', name: 'John', distance: 3.14 },
+  { id: 'b', name: 'Jane', distance: 0.45 },
+  { id: 'c', name: 'Jala', distance: 1.23 },
+];
+
+<Sort collection={collection} comparator="distance">
+  <Last>
+    {user => <div key={user.id}>You are furthest from {user.name}</div>}
+  </Last>
+</Sort>
+```
+
+
+### `<Map>`
+
+The simplest Collection Helper, doesn't do very much. Can be useful to ensure consistency between your components.
+
+#### Props
+
+| Prop         | Required | Types   | Notes    |
+|--------------|----------|---------|----------|
+| `collection` | ✓        | [`any`] | Can be implicitly passed by parent Collection Helpers
+
+#### Example
+
+```jsx
+const collection = [
+  { id: 'a', name: 'John' },
+  { id: 'b', name: 'Jane' },
+  { id: 'c', name: 'Jala' },
+];
+
+<Map collection={collection}>
+  {user => <div key={user.id}>{user.name}</div>}
+</Map>
+```
+
+
+### `<Reject>`
+
+Render only the children for which the predicate returns `false`. The opposite of `<Filter>`.
+
+#### Props
+
+| Prop         | Required | Types   | Notes    |
+|--------------|----------|---------|----------|
+| `collection` | ✓        | [`any`] | Can be implicitly passed by parent Collection Helpers
+| `predicate`  | ✓        | `function`/`object`| See [predicates](https://github.com/joshwcomeau/react-collection-helpers/tree/master/documentation/predicates.md) for more information |
+
+#### Example
+
+```jsx
+const collection = [
+  { id: 'a', name: 'apple', price: 1.00 },
+  { id: 'b', name: 'banana', price: 5.00 },
+  { id: 'c', name: 'carrot', price: 2.50 },
+];
+
+<Reject collection={collection} predicate={item => (item.price > 3)}>
+  {item => <div key={item.id}>{item.name}</div>}
+</Reject>
+```
+
+
+### `<Some>`
+
+Render the children if the predicate returns true for **any** child. A Fallback node can be provided, to be rendered if the predicate returns false. Otherwise, nothing will be rendered.
+
+#### Props
+
+| Prop         | Required | Types   | Notes    |
+|--------------|----------|---------|----------|
+| `collection` | ✓        | [`any`] | Can be implicitly passed by parent Collection Helpers
+| `predicate`  | ✓        | `function`/`object`| See [predicates](https://github.com/joshwcomeau/react-collection-helpers/tree/master/documentation/predicates.md) for more information |
+| `fallback`   | ✕        | `node` | Alternate content to be rendered if the predicate returns false on all items.
+
+#### Example
+
+```jsx
+const collection = [
+  { id: 'a', username: 'sickskillz', hasWon: false },
+  { id: 'b', username: 'dabomb12345', hasWon: false },
+];
+
+<Some
+  elementType={Leaderboard}
+  collection={collection}
+  predicate={{ hasWon: true }}
+>
+  {user => <LeaderboardRow key={user.id} {...user} />}
+</Some>
+```
+
+
+### `<Sort>`
+
+Sorts the children based on a comparator.
+
+#### Props
+
+| Prop         | Required | Types   | Notes    |
+|--------------|----------|---------|----------|
+| `collection` | ✓        | [`any`] | Can be implicitly passed by parent Collection Helpers
+| `comparator` | ✓        | `function`/`object`| See [comparators](https://github.com/joshwcomeau/react-collection-helpers/tree/master/documentation/comparators.md) for more information |
+| `descending` | ✕        | `boolean` | Whether to sort in descending order, when providing a 'string' comparator. Defaults to `false` (string comparators sort in ascending).
+
+#### Example
+
+```jsx
+const collection = [
+{ id: 'a', name: 'apple', price: 1.00 },
+{ id: 'b', name: 'banana', price: 5.00 },
+{ id: 'c', name: 'carrot', price: 2.50 },
+];
+
+<Sort collection={collection} comparator="price">
+  {item => <StoreItem key={item.id} {...item} />}
+</Sort>
+```
+
+
+
+
 
 
 <!-- Populate references above -->

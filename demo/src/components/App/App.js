@@ -71,6 +71,8 @@ const App = ({ children }) => (
         </li>
         <li>
           <strong className="mono">predicate</strong> - a matcher that will determine whether each item will be accepted or rejected. You can pass it a {'function'}, similar to <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">Array#filter</a>, but in this case we’re using the convenient object shorthand format.
+          {' '}
+          <a href="https://github.com/joshwcomeau/react-collection-helpers/blob/master/documentation/predicates.md">Read more about predicates in React Collection Helpers</a>.
         </li>
         <li>
           <strong className="mono">children</strong> - a {'function'} that decides how to render items that make it through the filter predicate. In this case, we’re rendering a User component for each accepted item.
@@ -106,6 +108,9 @@ const App = ({ children }) => (
         </li>
         <li>
           <strong className="mono">comparator</strong> - a matcher that will determine how to sort the collection. It accepts a {'function'}, similar to how <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">Array#sort</a> works. In this case, however, we’ve supplied a string shorthand, specifying which property we want to sort by.
+          {' '}
+          <a href="https://github.com/joshwcomeau/react-collection-helpers/blob/master/documentation/comparators.md">Read more about comparators in React Collection Helpers</a>.
+
         </li>
         <li>
           <strong className="mono">descending</strong> - by default, when using the 'string' shorthand for <span className="mono">comparator</span>, it will be sorted in ascending order. In this case, we want it sorted in descending order. The <span className="mono">descending</span> boolean prop allows us to make this distinction.

@@ -11,6 +11,7 @@ const FiddleEmbed = ({
   bodyColor,
   accentColor,
   menuColor,
+  children,
 }) => {
   let url = `//jsfiddle.net/joshwcomeau/${fiddleId}/`;
 
@@ -23,8 +24,6 @@ const FiddleEmbed = ({
     accentColor=${accentColor}&
     menuColor=${menuColor}`.replace(/\s/g, '');
 
-  console.log({ url })
-
   return (
     <div className="FiddleEmbed" style={{ height }}>
       <iframe
@@ -34,6 +33,7 @@ const FiddleEmbed = ({
         allowFullScreen="allowfullscreen"
         frameBorder="0"
       />
+      {children && <div className="annotation">{children}</div>}
     </div>
   );
 };

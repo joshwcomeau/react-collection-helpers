@@ -256,11 +256,11 @@ Render the children if the predicate returns true for **every** child. A Fallbac
 
 #### Props
 
-| Prop         | Required | Types   | Default | Notes    |
-|--------------|----------|---------|---------|----------|
-| `collection` | ✓        | [`any`] | `undefined`  | Can be implicitly passed by parent Collection Helpers
-| `predicate`  | ✓        | `function`/`object`| `undefined` | See [predicates](#predicates) for more information |
-| `fallback`   | ✕        | `node` | `undefined` | Alternate content to be rendered if the predicate returns false on any items.
+| Prop         | Required | Types   | Notes    |
+|--------------|----------|---------|----------|
+| `collection` | ✓        | [`any`] | Can be implicitly passed by parent Collection Helpers
+| `predicate`  | ✓        | `function`/`object`| See [predicates](#predicates) for more information |
+| `fallback`   | ✕        | `node` | Alternate content to be rendered if the predicate returns false on any items.
 
 #### Example
 
@@ -288,10 +288,10 @@ Render only the children for which the predicate returns `true`.
 
 #### Props
 
-| Prop         | Required | Types   | Default | Notes    |
-|--------------|----------|---------|---------|----------|
-| `collection` | ✓        | [`any`] | `undefined`  | Can be implicitly passed by parent Collection Helpers
-| `predicate`  | ✓        | `function`/`object`| `undefined` | See [predicates](#predicates) for more information |
+| Prop         | Required | Types   | Notes    |
+|--------------|----------|---------|----------|
+| `collection` | ✓        | [`any`] | Can be implicitly passed by parent Collection Helpers
+| `predicate`  | ✓        | `function`/`object`| See [predicates](#predicates) for more information |
 
 #### Example
 

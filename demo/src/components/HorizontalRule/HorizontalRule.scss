@@ -1,0 +1,27 @@
+@import '../../style-variables';
+
+.HorizontalRule {
+  position: relative;
+  margin: 4rem auto;
+  left: 0;
+  right: 0;
+}
+
+.HorizontalRule:before {
+  content: '';
+  position: absolute;
+  left: -50px;
+}
+
+.HorizontalRule:after {
+  content: '';
+  position: absolute;
+  right: -50px;
+}
+
+.HorizontalRule, .HorizontalRule:before, .HorizontalRule:after {
+  height: 6px;
+  width: 6px;
+  border-radius: 100%;
+  background-color: $lightgray;
+}

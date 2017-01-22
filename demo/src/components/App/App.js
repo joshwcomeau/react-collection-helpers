@@ -2,8 +2,10 @@ import React from 'react';
 
 import { Filter, Find, First } from '../../../../src';
 
+import Nav from '../Nav';
 import Header from '../Header';
 import MaxWidthWrapper from '../MaxWidthWrapper';
+import HorizontalRule from '../HorizontalRule';
 import ComponentName from '../ComponentName';
 import FiddleEmbed from '../FiddleEmbed';
 import './App.scss';
@@ -40,6 +42,7 @@ const users = [
 
 const App = ({ children }) => (
   <div className="App">
+    <Nav />
     <MaxWidthWrapper>
       <Header />
 

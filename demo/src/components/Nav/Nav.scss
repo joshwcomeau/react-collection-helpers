@@ -1,0 +1,29 @@
+.Nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 2rem;
+
+  a:after {
+    display: none;
+  }
+
+  a {
+    opacity: 0.6;
+    transition: opacity 350ms;
+
+    &:after {
+      display: none; // kill the normal link underline
+    }
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
+  img {
+    width: 2rem;
+    height: 2rem;
+    margin-left: 2rem;
+  }
+}

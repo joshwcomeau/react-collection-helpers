@@ -4,3 +4,10 @@
   padding: 20vh 1.5rem;
   margin: 0 auto;
 }
+
+@media (max-width: 600px) {
+  .MaxWidthWrapper {
+    padding: 45px 1.5rem;
+
+  }
+}

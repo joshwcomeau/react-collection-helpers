@@ -63,10 +63,44 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Lora', serif;
   font-weight: bold;
   margin-bottom: 0.4rem;
-  margin-top: 2rem;
+  margin-top: 3.5rem;
+}
+
+a {
+  position: relative;
+  display: inline-block;
+  color: $black;
+  // font-weight: bold;
+  text-decoration: none;
+}
+
+a:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: $black;
+  opacity: 0.2;
+  transition: opacity 350ms, transform 500ms ease-in;
+  transform: scaleX(0.9);
+}
+
+a:hover {
+  color: #000;
+}
+
+a:hover:after {
+  opacity: 1;
+  transform: scaleX(1);
+  transition: opacity 350ms, transform 500ms ease-out;
+
 }
 
 ol, ul {
+  color: $darkgray;
   padding: 1rem 2rem;
 }
 
@@ -105,4 +139,23 @@ p {
 
 .mono {
   font-family: monospace;
+}
+
+.contact-info {
+  font-size: 20px;
+  color: $black;
+}
+
+.centered {
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 32px;
+  }
+
+  .contact-info br {
+    display: none;
+  }
 }

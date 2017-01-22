@@ -22,6 +22,30 @@ const sampleCollection = [
 ];
 
 describe('composition', () => {
+  it('only creates the bottom-most wrapper element', () => {
+    const wrapper = render(
+      <Filter
+        className="filter"
+        collection={sampleCollection}
+        predicate={item => item.price <= 3}
+      >
+        <Sort className="sort" comparator="price">
+          {item => <div key={item.id}>{item.name}</div>}
+        </Sort>
+      </Filter>
+    );
+
+    const actualOutput = wrapper.html();
+    const expectedOutput = clearWhitespace(`
+      <div class="sort">
+        <div>Eggplant</div>
+      </div>
+    `);
+
+    expect(actualOutput).to.equal(expectedOutput);
+
+  });
+
   it('composes a Filter and a Sort', () => {
     const wrapper = render(
       <Filter collection={sampleCollection} predicate={item => item.price < 5}>

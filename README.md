@@ -96,9 +96,8 @@ const { Find, Every, Map } = require('react-collection-helpers');
 Alternatively, you can import components individually, to avoid bundling the components you don't use:
 
 ```js
-// React Collection Helpers share a lot of logic, and thus are each incredibly
-// lightweight. This technique isn't really necessary, but it's provided for
-// those with exceptionally tight byte budgets.
+// React Collection Helpers share a lot of logic, and thus are each incredibly lightweight.
+// This technique often isn't necessary, but is provided for those with exceptionally tight budgets.
 import Find from 'react-collection-helpers/Find';
 import Every from 'react-collection-helpers/Every';
 import Map from 'react-collection-helpers/Map';
@@ -133,6 +132,12 @@ The above example could be rewritten as:
   {item => <li>{item}</li>}
 </Filter>
 ```
+```html
+<ul class="list">
+  <li>...</li>
+</ul>
+```
+
 
 We're specifying that the <Filter> should return a `<ul>` instead of the default `<div>`, and we're applying a class name. This allows it to play nice with grid systems, since you can define Collection Helpers as rows.
 
@@ -144,9 +149,7 @@ You can even supply a composite component to use as wrapper:
 </Filter>
 ```
 
-Also, composed Collection Helpers don't create additional markup
-
-**Only the bottom-most helper in a chain of helpers will create a wrapping element.** For example:
+Another thing to note: **Only the bottom-most helper in a chain of helpers will create a wrapping element.** For example:
 
 ```js
 <Filter collection={collection} predicate={predicate}>
@@ -155,14 +158,14 @@ Also, composed Collection Helpers don't create additional markup
   </Sort>
 </Filter>
 ```
-... becomes ...
 ```html
 <ul class="sort">
   <div>...</div>
 </ul>
 ```
 
-It's also worth mentioning that Fiber, React's upcoming reconciliation engine, will **remove this requirement**, by [allowing components to return arrays](https://twitter.com/threepointone/status/810058843325546496). In a future major version of React Collection Helpers, expect to not have any additional markup created.
+It's also worth mentioning that Fiber, React's upcoming reconciliation engine, will _remove this requirement_, by [allowing components to return arrays](https://twitter.com/threepointone/status/810058843325546496). In a future major version of React Collection Helpers, expect to not have any additional markup created.
+
 
 
 ### Predicates
@@ -201,7 +204,6 @@ In React Collection Helpers, it works much the same way:
 <Filter collection={items} predicate={isWithinBudgetPredicate}>
   {item => <div key={item.name}>{item.name} - ${item.price}</div>}
 </Filter>
-
 /*
 <div>
   <div>apple - $1.00</div>
@@ -212,7 +214,6 @@ In React Collection Helpers, it works much the same way:
 <Find collection={items} predicate={isWithinBudgetPredicate}>
   {item => <div key={item.name}>{item.name} - ${item.price}</div>}
 </Find>
-
 /*
 <div>
   <div>apple - $1.00</div>
@@ -220,7 +221,7 @@ In React Collection Helpers, it works much the same way:
 */
 ```
 
-React Collection Helpers offer a nifty short-hand, though. Instead of passing a function, you can pass it an object:
+**Object short-hand**: Instead of passing a function, you can pass it an object that describes your requirement:
 
 ```js
 const items = [
@@ -242,7 +243,9 @@ const items = [
 
 ```
 
-Under the hood, this works the same way; a function is still applied to each item, however it compares the objects. In this case, it only matches items where `isOnSale` is equal to `true`.
+This is often a more declarative way to present a predicate, if you're testing for a specific object value. Under the hood, it creates a predicate function based on this object and applies it in the same way.
+
+
 
 
 ## API Reference

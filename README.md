@@ -96,8 +96,8 @@ const { Find, Every, Map } = require('react-collection-helpers');
 Alternatively, you can import components individually, to avoid bundling the components you don't use:
 
 ```jsx
-// React Collection Helpers share a lot of logic, and thus are each incredibly lightweight.
-// This technique often isn't necessary, but is provided for those with exceptionally tight budgets.
+// This method avoids bundling unused components, and reduces gzipped bundles
+// by about 1kb.
 import Find from 'react-collection-helpers/Find';
 import Every from 'react-collection-helpers/Every';
 import Map from 'react-collection-helpers/Map';

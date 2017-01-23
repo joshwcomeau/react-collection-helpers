@@ -1,20 +1,20 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
 import '../../polyfills';
 import { DISPLAY_NAME_PREFIX } from '../../constants';
-import filterBy from '../../utils/filter-by';
+import findBy from '../../utils/find-by';
 
 import BaseCollectionHelper from '../BaseCollectionHelper';
 
 
 const Some = ({ collection, predicate, fallback, ...baseProps }) => {
-  const filteredCollection = filterBy({
+  const match = findBy({
     collection,
     predicate,
     component: 'Some',
   });
 
-  if (filteredCollection.length === 0) {
+  if (!match) {
     return fallback || null;
   }
 
@@ -33,8 +33,14 @@ Some.propTypes = {
   predicate: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.object,
-  ]).isRequired,
+  ]),
   fallback: PropTypes.element,
+};
+
+Some.defaultProps = {
+  // Default to an always-true predicate, so it can be used to check for non-
+  // empty collections.
+  predicate: () => true,
 };
 
 

@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
 import '../../polyfills';
 import { DISPLAY_NAME_PREFIX } from '../../constants';
@@ -14,7 +14,10 @@ const Every = ({ collection, predicate, fallback, ...baseProps }) => {
     component: 'Every',
   });
 
-  if (filteredCollection.length < collection.length) {
+  const isEmpty = collection.length === 0;
+  const notAllMatch = filteredCollection.length < collection.length;
+
+  if (isEmpty || notAllMatch) {
     return fallback || null;
   }
 
@@ -33,8 +36,14 @@ Every.propTypes = {
   predicate: PropTypes.oneOfType([
     PropTypes.func,
     PropTypes.object,
-  ]).isRequired,
+  ]),
   fallback: PropTypes.element,
+};
+
+Every.defaultProps = {
+  // Default to an always-true predicate, so it can be used to check for non-
+  // empty collections.
+  predicate: () => true,
 };
 
 

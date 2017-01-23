@@ -63,6 +63,53 @@ describe('Some', () => {
     expect(wrapper.html()).to.equal('<div>Not Available</div>');
   });
 
+  it('defaults to an is-true predicate', () => {
+    const collection = [
+      { id: 'a', name: 'Apple', isLoaded: false },
+      { id: 'b', name: 'Banana', isLoaded: false },
+      { id: 'c', name: 'Carrot', isLoaded: false },
+    ];
+
+    const wrapper = shallow(
+      <Some collection={collection}>
+        {({ id, name }) => <div key={id}>{name}</div>}
+      </Some>
+    );
+
+    expect(wrapper.html()).to.equal(clearWhitespace(`
+      <div>
+        <div>Apple</div>
+        <div>Banana</div>
+        <div>Carrot</div>
+      </div>
+    `));
+  });
+
+  it('renders the fallback when no collection is provided', () => {
+    const collection = [];
+    const isLoaded = item => item.isLoaded;
+
+    const wrapper = shallow(
+      <Some collection={collection} predicate={isLoaded}>
+        {({ id, name }) => <div key={id}>{name}</div>}
+      </Some>
+    );
+
+    expect(wrapper.html()).to.equal(null);
+  });
+
+  it('renders the fallback when no collection AND no predicate is provided', () => {
+    const collection = [];
+
+    const wrapper = shallow(
+      <Some collection={collection}>
+        {({ id, name }) => <div key={id}>{name}</div>}
+      </Some>
+    );
+
+    expect(wrapper.html()).to.equal(null);
+  });
+
   it('renders the content when one item in the collection is valid', () => {
     const collection = [
       { id: 'a', name: 'Apple', isLoaded: true },

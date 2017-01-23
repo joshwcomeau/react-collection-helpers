@@ -4,7 +4,7 @@ import applyPredicateToCollectionWith from './apply-predicate-to-collection-with
 function efficientReject(collection, predicate) {
   const matches = [];
 
-  for (let i = 0; i < collection.length; i++) {
+  for (let i = 0; i < collection.length; i += 1) {
     if (!predicate(collection[i])) {
       matches.push(collection[i]);
     }

@@ -8,7 +8,7 @@ import Some from '../Some';
 
 import { clearWhitespace } from '../../helpers/test.helpers';
 
-const { describe, context, it } = global;
+const { describe, it } = global;
 
 
 describe('Some', () => {

@@ -51,7 +51,8 @@ FiddleEmbed.propTypes = {
   bodyColor: PropTypes.string.isRequired,
   accentColor: PropTypes.string.isRequired,
   menuColor: PropTypes.string.isRequired,
-}
+  children: PropTypes.node,
+};
 
 FiddleEmbed.defaultProps = {
   height: 300,
@@ -61,4 +62,4 @@ FiddleEmbed.defaultProps = {
   menuColor: 'F2F5F6',
 };
 
-export default FiddleEmbed
+export default FiddleEmbed;

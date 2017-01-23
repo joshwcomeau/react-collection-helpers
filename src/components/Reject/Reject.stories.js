@@ -3,7 +3,6 @@ import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 
 import Reject from '../Reject';
-import Sort from '../Sort';
 
 
 storiesOf('Reject', module)

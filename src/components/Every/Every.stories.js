@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { storiesOf } from '@kadira/storybook';
 
 // import { Every } from '../../../umd/react-collection-helpers';

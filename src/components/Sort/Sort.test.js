@@ -64,7 +64,7 @@ describe('Sort', () => {
         <div>Apple</div>
       </div>
     `));
-  })
+  });
 
   it('sorts by a compare function', () => {
     // More advanced tests for the sorting logic itself can be found in

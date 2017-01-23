@@ -6,4 +6,5 @@ import App from './components/App';
 
 const Demo = () => <App />;
 
-render(<Demo/>, document.querySelector('#demo'))
+// eslint-disable-next-line no-undef
+render(<Demo />, document.querySelector('#demo'));

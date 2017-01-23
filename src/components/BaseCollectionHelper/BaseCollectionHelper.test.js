@@ -54,6 +54,7 @@ describe('BaseCollectionHelper', () => {
     });
 
     it('throws when a composite element is provided as children', () => {
+      // eslint-disable-next-line react/prop-types
       const Child = ({ children }) => <div>{children}</div>;
 
       const wrapper = shallow.bind(null,

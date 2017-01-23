@@ -83,7 +83,7 @@ describe('rejectBy', () => {
       const collection = [
         { id: 'a', onSale: true },
         { id: 'b', onSale: false },
-        { id: 'c', onSale: false }
+        { id: 'c', onSale: false },
       ];
       const predicate = { id: 'b', onSale: false };
 

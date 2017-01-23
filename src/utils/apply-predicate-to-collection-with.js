@@ -20,6 +20,5 @@ export default function applyPredicateToCollectionWith(matcher) {
           invalidTypeSuppliedAsPredicate({ type, predicate, component })
         );
     }
-
-  }
+  };
 }

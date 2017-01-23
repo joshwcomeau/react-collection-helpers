@@ -8,7 +8,7 @@ import Reverse from '../Reverse';
 
 import { clearWhitespace } from '../../helpers/test.helpers';
 
-const { describe, context, it } = global;
+const { describe, it } = global;
 
 
 describe('Reverse', () => {
@@ -42,5 +42,5 @@ describe('Reverse', () => {
         <div>Apple</div>
       </div>
     `));
-  })
+  });
 });

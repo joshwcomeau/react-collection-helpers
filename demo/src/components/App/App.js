@@ -4,7 +4,6 @@ import React from 'react';
 import Nav from '../Nav';
 import Header from '../Header';
 import MaxWidthWrapper from '../MaxWidthWrapper';
-import HorizontalRule from '../HorizontalRule';
 import ComponentName from '../ComponentName';
 import FiddleEmbed from '../FiddleEmbed';
 import Footer from '../Footer';
@@ -41,7 +40,7 @@ const App = () => (
         Our <ComponentName>Filter</ComponentName> is using the following params:
       </p>
 
-      <ol>
+      <ul>
         <li>
           <strong className="mono">collection</strong> - the array of items we want to render
         </li>
@@ -53,7 +52,7 @@ const App = () => (
         <li>
           <strong className="mono">children</strong> - a {'function'} that decides how to render items that make it through the filter predicate. In this case, we’re rendering a User component for each accepted item.
         </li>
-      </ol>
+      </ul>
 
       <p>
         Passing a {'function'} as children is a little unconventional, but it’s a powerful way of giving the developer more control over the children’s output. In our case, you describe how you’d like a <em>single child</em> to look, and we apply that {'function'} to every item in the collection that makes it through the filter.
@@ -78,7 +77,7 @@ const App = () => (
         The <ComponentName>Sort</ComponentName> component is using the following props:
       </p>
 
-      <ol>
+      <ul>
         <li>
           <strong className="mono">collection</strong> - supplied automatically by the parent <ComponentName>Filter</ComponentName> component.
         </li>
@@ -91,7 +90,7 @@ const App = () => (
         <li>
           <strong className="mono">descending</strong> - by default, when using the &quot;string&quot; shorthand for <span className="mono">comparator</span>, it will be sorted in ascending order. In this case, we want it sorted in descending order. The <span className="mono">descending</span> boolean prop allows us to make this distinction.
         </li>
-      </ol>
+      </ul>
 
 
       <h4>Handling fallbacks</h4>
@@ -100,33 +99,28 @@ const App = () => (
         This is pretty cool! We have a list of online users, sorted by how recently we’ve spoken with them.
       </p>
       <p>
-        What happens, though, if no users are online? Our list wouldn’t render anything. We need a way to show a &quot;Nobody Here&quot; message if all our friends are off gallivanting without us.
+        What happens, though, if no users are online? Our list wouldn’t render anything. We need a way to show a fallback message if all our friends are off gallivanting without us.
       </p>
       <p>
         For this, we’ll need our good friend <ComponentName>Some</ComponentName>:
       </p>
 
-      <FiddleEmbed fiddleId="d3da14hy" height={265} revision={4} />
+      <FiddleEmbed fiddleId="nvx4wLqv" height={340} revision={1} />
 
       <p>
-        Nested components have the collections passed through automatically, and just need to define the attributes needed to modify it.
+        <ComponentName>Some</ComponentName> is similar to <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/some">Array#some</a>. It runs a predicate on every item in the array, and as long as at least one item returns true, it renders the whole list.
       </p>
+
       <p>
-        The <ComponentName>Sort</ComponentName> component is using the following props:
+        In the case of React Collection Helpers, though, it bestows two additional properties:
       </p>
 
       <ol>
         <li>
-          <strong className="mono">collection</strong> - supplied automatically by the parent <ComponentName>Filter</ComponentName> component.
+          Fallback support. If the predicate succeeds on at least 1 item, the children will be rendered. What about if it fails, though? By providing a <span className="mono">fallback</span> element, you can specify alternate content to render if the conditions are not met.
         </li>
         <li>
-          <strong className="mono">comparator</strong> - a matcher that will determine how to sort the collection. It accepts a {'function'}, similar to how <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">Array#sort</a> works. In this case, however, we’ve supplied a string shorthand, specifying which property we want to sort by.
-          {' '}
-          <a href="https://github.com/joshwcomeau/react-collection-helpers/blob/master/documentation/comparators.md">Read more about comparators in React Collection Helpers</a>.
-
-        </li>
-        <li>
-          <strong className="mono">descending</strong> - by default, when using the &quot;string&quot; shorthand for <span className="mono">comparator</span>, it will be sorted in ascending order. In this case, we want it sorted in descending order. The <span className="mono">descending</span> boolean prop allows us to make this distinction.
+          The predicate is optional. If no predicate is provided, it defaults to an &quot;always true&quot; predicate (<span className="mono">() =&gt; true</span>). This way, the content will be rendered as long as the array has 1 item. If it has 0 items, the fallback will be used instead.
         </li>
       </ol>
 
@@ -144,9 +138,9 @@ const App = () => (
         That said, React Collection Helpers is still in its infancy, and I’m still learning how it can best solve common problems. I suspect we’re still only scratching the surface of what this can be used for.
       </p>
 
-      <HorizontalRule />
-
-      <p className="contact-info centered">
+      <br />
+      <br />
+      <p className="contact-info">
         Have feedback? Ideas? Criticism? Want to help build this?
         {' '}
         <br />

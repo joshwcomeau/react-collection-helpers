@@ -70,6 +70,7 @@ a {
   position: relative;
   display: inline-block;
   color: $black;
+  transition: color 250ms;
   text-decoration: none;
 }
 
@@ -79,21 +80,21 @@ a:after {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 2px;
+  height: 3px;
   border-radius: 2px;
-  background: $black;
+  background: $red;
   opacity: 0.2;
   transition: opacity 350ms, transform 500ms ease-in;
-  transform: scaleX(0.9);
+  transform: scaleY(0.66);
 }
 
 a:hover {
-  color: #000;
+  color: $red;
 }
 
 a:hover:after {
   opacity: 1;
-  transform: scaleX(1);
+  transform: scaleY(1);
   transition: opacity 350ms, transform 500ms ease-out;
 
 }

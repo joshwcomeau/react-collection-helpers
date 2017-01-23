@@ -1,0 +1,11 @@
+@import '../../style-variables';
+
+.Footer {
+  text-align: center;
+  font-size: 13px;
+  padding: 2rem;
+
+  a {
+    color: $red;
+  }
+}

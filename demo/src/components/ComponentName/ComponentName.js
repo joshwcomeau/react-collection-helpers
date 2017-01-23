@@ -4,7 +4,12 @@ import './ComponentName.scss';
 
 
 const ComponentName = ({ children }) => (
-  <span className="ComponentName">{`<${children}>`}</span>
+  <a
+    href={`https://github.com/joshwcomeau/react-collection-helpers#${children.toLowerCase()}`}
+    className="ComponentName"
+  >
+    {`<${children}>`}
+  </a>
 );
 
 ComponentName.propTypes = {

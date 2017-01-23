@@ -85,7 +85,7 @@ describe('Some', () => {
     `));
   });
 
-  it('renders the fallback when no collection is provided', () => {
+  it('renders null when no collection is provided', () => {
     const collection = [];
     const isLoaded = item => item.isLoaded;
 
@@ -98,16 +98,31 @@ describe('Some', () => {
     expect(wrapper.html()).to.equal(null);
   });
 
-  it('renders the fallback when no collection AND no predicate is provided', () => {
+  it('renders the fallback when no collection is provided', () => {
     const collection = [];
+    const isLoaded = item => item.isLoaded;
+    const fallback = <span>Fallback</span>;
 
     const wrapper = shallow(
-      <Some collection={collection}>
+      <Some collection={collection} predicate={isLoaded} fallback={fallback}>
         {({ id, name }) => <div key={id}>{name}</div>}
       </Some>
     );
 
-    expect(wrapper.html()).to.equal(null);
+    expect(wrapper.html()).to.equal('<span>Fallback</span>');
+  });
+
+  it('renders the fallback when no collection AND no predicate is provided', () => {
+    const collection = [];
+    const fallback = <span>Fallback</span>;
+
+    const wrapper = shallow(
+      <Some collection={collection} fallback={fallback}>
+        {({ id, name }) => <div key={id}>{name}</div>}
+      </Some>
+    );
+
+    expect(wrapper.html()).to.equal('<span>Fallback</span>');
   });
 
   it('renders the content when one item in the collection is valid', () => {

@@ -1,5 +1,5 @@
 # React Collection Helpers
-#### A suite of composable utility components to manipulate collections. Make JSX Clean Again.
+#### A suite of composable utility components to manipulate collections.
 
 [![Travis][build-badge]][build]
 [![npm package][npm-badge]][npm]
@@ -131,12 +131,14 @@ Learn more about how best to use React Collection Helpers with these in-depth gu
 
 Render the children if the predicate returns true for **every** child. A Fallback node can be provided, to be rendered if the predicate returns false. Otherwise, nothing will be rendered.
 
+If no predicate is provided, will return true if the collection has 1+ items, and false if the collection is empty.
+
 #### Props
 
 | Prop         | Required | Types   | Notes    |
 |--------------|----------|---------|----------|
 | `collection` | ✓        | [`any`] | Can be implicitly passed by parent Collection Helpers
-| `predicate`  | ✓        | `function`/`object`| See [predicates](https://github.com/joshwcomeau/react-collection-helpers/tree/master/documentation/predicates.md) for more information |
+| `predicate`  | ✕        | `function`/`object`| See [predicates](https://github.com/joshwcomeau/react-collection-helpers/tree/master/documentation/predicates.md) for more information |
 | `fallback`   | ✕        | `node` | Alternate content to be rendered if the predicate returns false on any items.
 
 #### Example
@@ -325,12 +327,14 @@ const collection = [
 
 Render the children if the predicate returns true for **any** child. A Fallback node can be provided, to be rendered if the predicate returns false. Otherwise, nothing will be rendered.
 
+If no predicate is provided, will return true if the collection has 1+ items, and false if the collection is empty.
+
 #### Props
 
 | Prop         | Required | Types   | Notes    |
 |--------------|----------|---------|----------|
 | `collection` | ✓        | [`any`] | Can be implicitly passed by parent Collection Helpers
-| `predicate`  | ✓        | `function`/`object`| See [predicates](https://github.com/joshwcomeau/react-collection-helpers/tree/master/documentation/predicates.md) for more information |
+| `predicate`  | ✕        | `function`/`object`| See [predicates](https://github.com/joshwcomeau/react-collection-helpers/tree/master/documentation/predicates.md) for more information |
 | `fallback`   | ✕        | `node` | Alternate content to be rendered if the predicate returns false on all items.
 
 #### Example

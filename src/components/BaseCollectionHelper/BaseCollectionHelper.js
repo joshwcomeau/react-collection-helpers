@@ -1,6 +1,5 @@
 import { createElement, isValidElement, cloneElement, PropTypes } from 'react';
 
-import '../../polyfills';
 import { isCollectionHelper } from '../../helpers/misc.helpers';
 import {
   unknownChildPassedToCollectionHelper,

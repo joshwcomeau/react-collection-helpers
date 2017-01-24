@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 
-import '../../polyfills';
 import { DISPLAY_NAME_PREFIX } from '../../constants';
 
 import BaseCollectionHelper from '../BaseCollectionHelper';

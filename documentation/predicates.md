@@ -1,6 +1,6 @@
 # Predicates in React Collection Helpers
 
-Many React Collection Helpers ([`<Filter>`](#filter), [`<Find>`](#find), [`<Every>`](#every), and more) use a `predicate` prop to determine whether an item in a collection matches or not.
+Many React Collection Helpers ([`<Filter>`](https://github.com/joshwcomeau/react-collection-helpers#filter), [`<Find>`](https://github.com/joshwcomeau/react-collection-helpers#find), [`<Every>`](https://github.com/joshwcomeau/react-collection-helpers#every), and more) use a `predicate` prop to determine whether an item in a collection matches or not.
 
 
 ### Predicates in general

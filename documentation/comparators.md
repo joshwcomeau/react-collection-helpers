@@ -1,6 +1,6 @@
 # Comparators in React Collection Helpers
 
-The [`<Sort>`](#sort) Collection Helper takes a comparator as an argument. This guide explains how that works, and what's supported.
+The [`<Sort>`](https://github.com/joshwcomeau/react-collection-helpers#sort) Collection Helper takes a comparator as an argument. This guide explains how that works, and what's supported.
 
 ### Comparators in general
 
@@ -154,7 +154,7 @@ However, what if you wanted to sort _descending_ instead of _ascending_? Using t
 
 Thankfully, you can add the `descending` prop to specify a descending order, when using the string short-hand:
 
-```js
+```jsx
 const items = [
   { id: 'a', name: 'apple', price: 1 },
   { id: 'b', name: 'banana', price: 5 },

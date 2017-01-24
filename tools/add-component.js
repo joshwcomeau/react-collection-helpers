@@ -74,8 +74,6 @@ function buildJSTemplate(ComponentName) {
   return `\
 import React, { Component, PropTypes } from 'react';
 
-import '../../polyfills';
-
 
 const ${ComponentName} = () => {
   return (

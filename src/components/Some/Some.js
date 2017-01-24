@@ -1,30 +1,34 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 
-import '../../polyfills';
 import { DISPLAY_NAME_PREFIX } from '../../constants';
 import findBy from '../../utils/find-by';
 
 import BaseCollectionHelper from '../BaseCollectionHelper';
 
 
-const Some = ({ collection, predicate, fallback, ...baseProps }) => {
-  const match = findBy({
-    collection,
-    predicate,
-    component: 'Some',
-  });
+// This can't be an SFC because it has the potential to return `null`.
+class Some extends Component {
+  render() {
+    const { collection, predicate, fallback, ...baseProps } = this.props;
 
-  if (!match) {
-    return fallback || null;
+    const match = findBy({
+      collection,
+      predicate,
+      component: 'Some',
+    });
+
+    if (!match) {
+      return fallback;
+    }
+
+    return (
+      <BaseCollectionHelper
+        collection={collection}
+        {...baseProps}
+      />
+    );
   }
-
-  return (
-    <BaseCollectionHelper
-      collection={collection}
-      {...baseProps}
-    />
-  );
-};
+}
 
 Some.displayName = `${DISPLAY_NAME_PREFIX}Some`;
 
@@ -41,6 +45,7 @@ Some.defaultProps = {
   // Default to an always-true predicate, so it can be used to check for non-
   // empty collections.
   predicate: () => true,
+  fallback: null,
 };
 
 

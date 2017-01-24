@@ -1,6 +1,6 @@
 {
   "name": "react-collection-helpers",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "React Collection Helpers Component",
   "main": "lib/index.js",
   "module": "es/index.js",

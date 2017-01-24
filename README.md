@@ -48,9 +48,36 @@ ReactDOM.render(
 
 
 
+
 ## Live Demo
 
-[Play with a live demo.](https://joshwcomeau.github.io/react-collection-helpers/demo/dist/)
+**[Play with a live demo.](https://joshwcomeau.github.io/react-collection-helpers/demo/dist/)**
+
+
+
+
+## Table of Contents
+
+- [Features](#features)
+- [Installation](#installation)
+- [Feedback Wanted](#feedback-wanted)
+- [Usage](#usage)
+- [Guides](#guides)
+  - [Understanding and Customizing Markup](https://github.com/joshwcomeau/react-collection-helpers/blob/master/documentation/markup.md)
+  - [Predicates in React Collection Helpers](https://github.com/joshwcomeau/react-collection-helpers/blob/master/documentation/predicates.md)
+  - [Comparators in React Collection Helpers](https://github.com/joshwcomeau/react-collection-helpers/blob/master/documentation/comparators.md)
+- [API Reference](#api-reference)
+  - [`<Every>`](#every)
+  - [`<Filter>`](#filter)
+  - [`<Find>`](#find)
+  - [`<First>`](#first)
+  - [`<Last>`](#last)
+  - [`<Map>`](#map)
+  - [`<Reject>`](#reject)
+  - [`<Reverse>`](#reverse)
+  - [`<Some>`](#some)
+  - [`<Sort>`](#sort)
+
 
 
 
@@ -59,20 +86,9 @@ ReactDOM.render(
 - :sparkles: **Useful** - includes 10+ components to help you filter, sort, and slice collections.
 - :black_nib: **Designer-friendly** - make your designers' lives easier by writing components without complex inline logic.
 - :zap: **Tiny** - full build is only 2.5kb, and is modular so you can import only the components you need.
-- :muscle: **Performant** - there is [zero perf cost](https://github.com/joshwcomeau/react-collection-helpers/blob/master/tools/performance-checks.js) to using these components over traditional methods.
+- :muscle: **Performant** - [experiments show](https://github.com/joshwcomeau/react-collection-helpers/blob/master/tools/performance-checks.js) that these components are just as performant as native methods.
 - :wrench: **Customizable** - the wrapper element can be any element type you'd like (native _or_ composite), and all non-recognized props are passed through. Composing Collection Helpers does not create additional HTML markup!
 
-
-
-## Feedback Wanted
-
-This project is an experiment to test the usefulness of collection manipulators in component form factor.
-
-When I say that it's an experiment, I don't necessarily mean that it's _experimental_. I'm pretty confident that it's stable and safe to use in production; the code is quite simple.
-
-Rather, I mean that I'm not convinced that it solves a real problem. I'd like to hear from users who implement them; does it improve the development experience of you or your team? Do you think the idea has potential if it went in a certain direction? I'm open to exploring tangential ideas.
-
-Let me know on [Twitter](https://twitter.com/joshwcomeau), or [via email](mailto:joshwcomeau@gmail.com)
 
 
 
@@ -88,6 +104,19 @@ UMD builds are also available via CDN:
 - [react-collection-helpers.min.js](https://unpkg.com/react-collection-helpers@1.1.0/umd/react-collection-helpers.js)
 
 (If you use the UMD build, the global variable is `CollectionHelpers`)
+
+
+
+
+## Feedback Wanted
+
+This project is an experiment to test the usefulness of collection manipulators in component form factor.
+
+When I say that it's an experiment, I don't necessarily mean that it's _experimental_. I'm pretty confident that it's stable and safe to use in production; the code is quite simple.
+
+Rather, I mean that I'm not convinced that it solves a real problem. I'd like to hear from users who implement them; does it improve the development experience of you or your team? Do you think the idea has potential if it went in a certain direction? I'm open to exploring tangential ideas.
+
+Let me know [on Twitter](https://twitter.com/joshwcomeau), or [via email](mailto:joshwcomeau+rch@gmail.com)
 
 
 
@@ -129,9 +158,9 @@ Learn more about how best to use React Collection Helpers with these in-depth gu
 
 ### `<Every>`
 
-Render the children if the predicate returns true for **every** child. A Fallback node can be provided, to be rendered if the predicate returns false. Otherwise, nothing will be rendered.
+Render the children if the predicate returns true for **every** child. A Fallback node can be provided, to be rendered if the predicate returns false for any child. Otherwise, nothing will be rendered.
 
-If no predicate is provided, will return true if the collection has 1+ items, and false if the collection is empty.
+If no predicate is provided, the content will be rendered as long as the collection has 1 item or more. If an empty collection is supplied, the fallback content will be rendered.
 
 #### Props
 
@@ -325,9 +354,9 @@ const collection = [
 
 ### `<Some>`
 
-Render the children if the predicate returns true for **any** child. A Fallback node can be provided, to be rendered if the predicate returns false. Otherwise, nothing will be rendered.
+Render the children if the predicate returns true for **any** child. A Fallback node can be provided, to be rendered if the predicate returns false for all children. Otherwise, nothing will be rendered.
 
-If no predicate is provided, will return true if the collection has 1+ items, and false if the collection is empty.
+If no predicate is provided, the content will be rendered as long as the collection has 1 item or more. If an empty collection is supplied, the fallback content will be rendered.
 
 #### Props
 

@@ -55,10 +55,10 @@ ReactDOM.render(
 
 
 
-
 ## Table of Contents
 
 - [Features](#features)
+- [Drawbacks](#drawbacks)
 - [Installation](#installation)
 - [Feedback Wanted](#feedback-wanted)
 - [Usage](#usage)
@@ -88,6 +88,23 @@ ReactDOM.render(
 - :zap: **Tiny** - full build is only 2.5kb, and is modular so you can import only the components you need.
 - :muscle: **Performant** - [experiments show](https://github.com/joshwcomeau/react-collection-helpers/blob/master/tools/performance-checks.js) that these components are just as performant as native methods.
 - :wrench: **Customizable** - the wrapper element can be any element type you'd like (native _or_ composite), and all non-recognized props are passed through. Composing Collection Helpers does not create additional HTML markup!
+
+
+
+
+## Drawbacks
+
+So, React Collection Helpers is an experiment, designed to test if React's component model makes sense when used for array manipulation.
+
+I believe that it's nicer, for the [reasons outlined above](#features), than doing vanilla JS manipulation within your component's render method. That said, *this is often the wrong place to be doing this kind of logic*.
+
+For very large collections, or for components that re-render frequently, it makes sense to move this kind of intense manipulation into memoized functions. If you use Redux, then [reselect](https://github.com/reactjs/reselect) is likely a better place to do this kind of work.
+
+It also means that your presentation layer never has to concern itself with this work, which is usually a good thing.
+
+For small apps (or simple sections within large apps), React Collection Helpers can be a nice touch. For redux apps, though, there is often a better way.
+
+Ultimately, React Collection Helpers is built as a starting point, not a final destination. I feel like with enough trial and error, we might stumble upon something genuinely innovative and useful. I'm going to continue experimenting, and I would encourage us all to keep an open mind, and an eye out for exciting new possibilities.
 
 
 
